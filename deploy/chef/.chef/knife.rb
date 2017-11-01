@@ -4,7 +4,7 @@ log_location             STDOUT
 node_name                "glmanhtu"
 
 client_key               "#{current_dir}/client.pem"
-chef_server_url          "https://api.chef.io/organizations/athena_server"
+chef_server_url          "https://api.chef.io/organizations/ebi"
 
 cookbook_path    ["cookbooks", "site-cookbooks"]
 node_path        "nodes"

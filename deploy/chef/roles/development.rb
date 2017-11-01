@@ -15,12 +15,17 @@ default_attributes({
   	    "jar"   =>  {
   	        "name"  =>  "ebi.genome.jar",
             "location"  =>  "target",
-            "arg"   =>  "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005echo "# genome" >> README.md"
+            "arg"   =>  "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
   	    },
   	    "profile"   =>  "dev",
   	    "git"   =>  {
   	        "url"   =>  "git@github.com:glmanhtu/genome.git",
-  	        "branch"    =>  "dev"
+  	        "branch"    =>  "dev",
+  	        "databag"   => {
+  	            "name"  =>  "ebi",
+  	            "key"   =>  "private",
+  	            "property"  =>  "private_ssh_key"
+  	        }
   	    }
   	}
 })
