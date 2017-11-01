@@ -21,7 +21,9 @@ default_attributes({
   	    "git"   =>  {
   	        "url"   =>  "git@github.com:glmanhtu/genome.git",
   	        "branch"    =>  "dev",
+  	        "private"   => true,
   	        "databag"   => {
+
   	            "name"  =>  "ebi",
   	            "key"   =>  "private",
   	            "property"  =>  "private_ssh_key"
