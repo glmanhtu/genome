@@ -1,5 +1,5 @@
-name "development"
-description "Install Athena BI Backend on Development Environment"
+name "prod"
+description "Install Genome to server"
 default_attributes({
 	"java" => {
 	    "install_flavor" => "oracle",
@@ -17,7 +17,7 @@ default_attributes({
             "location"  =>  "target",
             "arg"   =>  "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
   	    },
-  	    "profile"   =>  "dev",
+  	    "profile"   =>  "prod",
   	    "git"   =>  {
   	        "url"   =>  "git@github.com:glmanhtu/genome.git",
   	        "branch"    =>  "dev",

@@ -1,4 +1,4 @@
-package com.ebi.genome.backend.service;
+package com.ebi.genome.service;
 
 import org.junit.Assert;
 import org.junit.Test;

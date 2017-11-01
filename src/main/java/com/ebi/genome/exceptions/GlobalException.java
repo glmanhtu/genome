@@ -24,7 +24,7 @@ public class GlobalException {
         Message message = new Message();
         message.setCode(CODE_302);
         message.setMessage(e.getMessage());
-        return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -33,6 +33,6 @@ public class GlobalException {
         Message message = new Message();
         message.setCode(e.getCode());
         message.setMessage(e.getMessage());
-        return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 }

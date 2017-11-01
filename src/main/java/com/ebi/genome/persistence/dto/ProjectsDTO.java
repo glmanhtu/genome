@@ -1,11 +1,9 @@
-package com.ebi.genome.backend.persistence.domain;
+package com.ebi.genome.persistence.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-@Entity
-public class Projects {
+/**
+ * Use to transfer object Projects over internet
+ */
+public class ProjectsDTO {
 
     private String projectId;
 
@@ -21,9 +19,7 @@ public class Projects {
 
     private String centerName;
 
-    @ManyToOne
-    @JoinColumn(name = "taxonomy_id", referencedColumnName = "taxonomy_id")
-    private Taxonomies taxonomies;
+    private int taxonomyId;
 
     public String getProjectId() {
         return projectId;
@@ -81,17 +77,17 @@ public class Projects {
         this.centerName = centerName;
     }
 
-    public Taxonomies getTaxonomies() {
-        return taxonomies;
+    public int getTaxonomyId() {
+        return taxonomyId;
     }
 
-    public void setTaxonomies(Taxonomies taxonomies) {
-        this.taxonomies = taxonomies;
+    public void setTaxonomyId(int taxonomyId) {
+        this.taxonomyId = taxonomyId;
     }
 
     @Override
     public String toString() {
-        return "{\"Projects\":{"
+        return "{\"ProjectsDTO\":{"
                 + "\"projectId\":\"" + projectId + "\""
                 + ", \"title\":\"" + title + "\""
                 + ", \"description\":\"" + description + "\""
@@ -99,7 +95,7 @@ public class Projects {
                 + ", \"studyType\":\"" + studyType + "\""
                 + ", \"evaCenterName\":\"" + evaCenterName + "\""
                 + ", \"centerName\":\"" + centerName + "\""
-                + ", \"taxonomies\":" + taxonomies
+                + ", \"taxonomyId\":\"" + taxonomyId + "\""
                 + "}}";
     }
 }

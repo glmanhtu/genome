@@ -1,9 +1,12 @@
-package com.ebi.genome.backend.persistence.domain;
+package com.ebi.genome.persistence.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Taxonomies {
+
+    @Id
     private int taxonomyId;
 
     private String taxonomyCommonName;
