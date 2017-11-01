@@ -1,0 +1,10 @@
+source "https://supermarket.getchef.com"
+
+cookbook 'java'
+cookbook 'maven', '~> 5.0.0'
+cookbook 'build-essential', '~> 8.0.2'
+cookbook 'git'
+cookbook 'chef_nginx', '~> 6.0.2'
+cookbook 'nodejs'
+cookbook 'nodejs-deploy'
+cookbook 'maven-deploy'
