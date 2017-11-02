@@ -34,11 +34,29 @@ public class ITStudiesHandler {
     }
 
     @Test
-    public void testGetAllProject() throws IOException {
+    public void testGetAllStudies() throws IOException {
         String response = testRestTemplate.getForObject("/studies", String.class);
         Page<ProjectsDTO> projectsDTOs = objectMapper.readValue(
             response, objectMapper.getTypeFactory().constructParametricType(CustomPageImpl.class, ProjectsDTO.class));
         Assert.assertNotNull(projectsDTOs);
         Assert.assertEquals(projectsDTOs.getTotalElements(), 113);
+    }
+
+    @Test
+    public void testGetAllStudiesByTaxonomyId() throws IOException {
+        String response = testRestTemplate.getForObject("/studies?taxonomyId=199890", String.class);
+        Page<ProjectsDTO> projectsDTOs = objectMapper.readValue(
+                response, objectMapper.getTypeFactory().constructParametricType(CustomPageImpl.class, ProjectsDTO.class));
+        Assert.assertNotNull(projectsDTOs);
+        Assert.assertEquals(projectsDTOs.getTotalElements(), 1);
+    }
+
+    @Test
+    public void testFindAllStudiesByStudyType() throws IOException {
+        String response = testRestTemplate.getForObject("/studies?studyType=Control Set", String.class);
+        Page<ProjectsDTO> projectsDTOs = objectMapper.readValue(
+                response, objectMapper.getTypeFactory().constructParametricType(CustomPageImpl.class, ProjectsDTO.class));
+        Assert.assertNotNull(projectsDTOs);
+        Assert.assertEquals(projectsDTOs.getTotalElements(), 101);
     }
 }
