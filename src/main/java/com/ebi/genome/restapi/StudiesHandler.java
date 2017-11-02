@@ -72,7 +72,8 @@ public class StudiesHandler {
     @GetMapping(value = "/{projectsId}")
     public ResponseEntity<?> getStudy(@PathVariable("projectsId") String projectsId) {
         Projects projects = projectsService.getProject(projectsId);
-        return DefaultResponse.success(projects);
+        ProjectsDTO projectsDTO = convertToDTO(projects);
+        return DefaultResponse.success(projectsDTO);
     }
 
     private ProjectsDTO convertToDTO(Projects projects) {
