@@ -1,0 +1,24 @@
+<div class="main-fab">
+	<md-button class="md-fab md-primary">+</md-button>
+</div>
+<md-toolbar class="md-tall navigation" layout="column">
+	<span flex="flex"></span>
+	<div class="md-toolbar-tools">
+		<div class="fill-height" layout="row" flex="flex">
+
+			<div class="md-toolbar-item md-breadcrumb">
+				<span>Genome repository</span>
+			</div>
+
+			<span flex="flex"></span>
+			<md-input-container flex="flex" style="padding-left:88px" ng-show="toggleSearch">
+				<input id="searchinput" type="text" ng-model="search" show-focus="toggleSearch"/>
+			</md-input-container>
+			<div class="md-toolbar-item md-tools" layout="row">
+				<a class="md-button md-default-theme" href="#" ng-click="toggleSearch = !toggleSearch">
+					<i class="ion-android-search"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+</md-toolbar>

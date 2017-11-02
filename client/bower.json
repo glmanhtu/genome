@@ -1,0 +1,46 @@
+{
+  "name": "genome",
+  "version": "1.0.0",
+  "authors": [
+    "VU Manh Tu"
+  ],
+  "description": "Genome",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.10",
+    "jquery": "~1.11.2",
+    "angular-toastr": "~1.7.0",
+    "angular-ui-router": "0.4.2",
+    "angular-animate": "^1.3.20",
+    "angular-aria": "^1.3.20",
+    "angular-material": "^0.7.1",
+    "col-resizable": "^1.5.0"
+  },
+  "resolutions": {
+    "angular": "~1.3.10"
+  },
+  "overrides": {
+    "angular-animate": {
+      "main": [
+        "angular-animate.js"
+      ]
+    },
+    "angular-aria": {
+      "main": [
+        "angular-aria.js"
+      ]
+    },
+    "angular-material": {
+      "main": [
+        "angular-material.js",
+        "angular-material.min.css"
+      ]
+    }
+  }
+}
