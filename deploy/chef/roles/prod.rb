@@ -61,5 +61,6 @@ run_list(
   "recipe[java]",
   "recipe[maven]",
   "recipe[git]",
-  "recipe[maven-deploy]"
+  "recipe[maven-deploy]",
+  "recipe[nodejs-deploy]"
 )
