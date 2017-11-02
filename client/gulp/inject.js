@@ -28,7 +28,8 @@ gulp.task('inject', ['scripts', 'styles', 'copyVendorImages'], function () {
     path.join(conf.paths.src, '/app/**/*.js'),
     path.join(conf.paths.shader, '/**/*.js'),
     path.join('!' + conf.paths.src, '/app/**/*.spec.js'),
-    path.join('!' + conf.paths.src, '/app/**/*.mock.js')      
+    path.join('!' + conf.paths.src, '/app/**/*.mock.js'),
+    path.join(conf.paths.src, "/env/" + env + ".js" )
   ])
   .on('error', conf.errorHandler('AngularFilesort'));
 

@@ -4,8 +4,8 @@
         <tr class="md-table-headers-row">
             <th class="md-table-header" ng-repeat="h in headers">
                 <a href="#" ng-if="handleSort(h.field)" ng-click="reverse=!reverse;order(h.field,reverse)">
-                    {{h.name}} <i class="ion-android-arrow-dropup" ng-show="reverse &amp;&amp; h.field == predicate"></i>
-                    <i class="ion-android-arrow-dropdown" ng-show="!reverse &amp;&amp; h.field == predicate"></i>
+                    {{h.name}} <i class="ion-android-arrow-dropup" ng-show="reverse &amp;&amp; h.field == predicate.predicate"></i>
+                    <i class="ion-android-arrow-dropdown" ng-show="!reverse &amp;&amp; h.field == predicate.predicate"></i>
                 </a>
                 <span ng-if="!handleSort(h.field)">{{h.name}}</span>
             </th>
@@ -13,13 +13,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="md-table-content-row" ng-repeat="c in content | filter:filters | startFrom:tablePage*count | limitTo: count">
+        <tr class="md-table-content-row" ng-repeat="c in content">
             <td>
-                <div class="md-table-content md-table-first-column" ng-repeat="h in headers" ng-if="h.field == project_id">
-                    {{c.project_id}}
+                <div class="md-table-content md-table-first-column" ng-repeat="h in headers" ng-if="h.field == firstColumn">
+                    {{c.projectId}}
                 </div>
             </td>
-            <td class="md-table-content" ng-repeat="h in headers" ng-class="customClass[h.field]" ng-if="h.field != project_id">
+            <td class="md-table-content" ng-repeat="h in headers" ng-class="customClass[h.field]" ng-if="h.field != firstColumn">
                 {{(h.field.indexOf('date') > 0) ? $filter('date')(c[h.field]) : c[h.field];}}
             </td>
             <td class="md-table-td-more">
@@ -30,18 +30,13 @@
     </table>
     <div class="md-table-footer" layout="row">
         <span flex="flex"></span>
-        <span ng-show="nbOfPages() &gt; 1">
-            <md-button class="md-primary md-hue-2" ng-disabled="tablePage==0" ng-click="tablePage=tablePage-1" aria-label="Previous Page">
-                <i class="ion-chevron-left" style="font-size:16px"></i>
-            </md-button>
-            <a href="#" ng-repeat="i in getNumber(nbOfPages()) track by $index">
-                <md-button class="md-primary md-hue-2 md-table-footer-item" ng-click="goToPage($index)">
-                    <span ng-class="{ 'md-table-active-page': tablePage==$index}">{{$index+1}}</span>
-                </md-button>
-            </a>
-            <md-button class="md-primary md-hue-2" ng-disabled="tablePage==nbOfPages()-1" ng-click="tablePage=tablePage+1" aria-label="Next Page">
-                <i class="ion-chevron-right" style="font-size:16px"></i>
-            </md-button>
-        </span>
+        <paging
+          page="tablePage"
+          page-size="count" 
+          total="totalItems"
+          paging-action="goToPage(page)"
+          show-prev-next="true"
+          show-first-last="true">
+        </paging>  
     </div>
 </md-content>
