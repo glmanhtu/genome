@@ -36,7 +36,7 @@ default_attributes({
          },
          "server"    =>  {
              "root"  =>  "/usr/local/nodejs-deploy/genome-source-root",
-             "host_name" =>  "35.192.58.214",
+             "host_name" =>  "35.192.54.89",
              "port"  =>  80
          },
          "profile"   =>  "development",
@@ -61,5 +61,6 @@ run_list(
   "recipe[java]",
   "recipe[maven]",
   "recipe[git]",
-  "recipe[maven-deploy]"
+  "recipe[maven-deploy]",
+  "recipe[nodejs-deploy]"
 )
