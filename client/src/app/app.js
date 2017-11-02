@@ -5,6 +5,7 @@
         	'ngMaterial',
             'toastr',
             'ui.router',
+            'bw.paging',
             'Genome.pages',
             'Genome.theme'
         ])
