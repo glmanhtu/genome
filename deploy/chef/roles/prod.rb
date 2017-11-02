@@ -29,7 +29,32 @@ default_attributes({
   	            "property"  =>  "private_ssh_key"
   	        }
   	    }
-  	}
+  	},
+    "nodejs-deploy" => {
+         "application"   =>  {
+             "name"  =>  "ebi.genome"
+         },
+         "server"    =>  {
+             "root"  =>  "/usr/local/nodejs-deploy/genome-source-root",
+             "host_name" =>  "35.192.58.214",
+             "port"  =>  80
+         },
+         "profile"   =>  "development",
+         "build" =>  {
+             "max_memory"    =>  750
+         },
+         "git"   =>  {
+             "url"   =>  "git@github.com:glmanhtu/genome.git",
+             "branch"    =>  "dev",
+             "project_location"  =>  "client",
+             "private"   => true,
+             "databag"   => {
+                "name"  =>  "ebi",
+                "key"   =>  "private",
+                "property"  =>  "private_ssh_key"
+            }
+         }
+     }
 })
 
 run_list(
