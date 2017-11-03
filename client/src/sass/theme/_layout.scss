@@ -7,14 +7,30 @@
 }
 
 a {
-  text-decoration: none;
-  color: inherit;
-  &:active{
-  	color: inherit;
-  }
+	&:hover, &:visited {
+		text-decoration: none;
+		color: inherit;		
+	}
+	outline:none !important;
+  	text-decoration: none;
+  	color: inherit;  
 }
 
 i {
   vertical-align: middle;
   font-size: 24px;
+}
+
+md-content {
+  overflow: visible;
+}
+
+.md-dialog-container {
+  position: fixed;
+  md-toolbar {
+    min-height: 48px;
+  }
+  .md-toolbar-tools {
+    height: 48px;
+  }
 }
