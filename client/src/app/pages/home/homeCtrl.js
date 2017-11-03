@@ -61,8 +61,9 @@
       $scope.order($scope.predicate.predicate, $scope.predicate.reverse);
     }
 
-    $scope.showAdvanced = function(ev) {
+    $scope.showAdvanced = function(ev, project) {
       $mdDialog.show({
+        locals: { project: project},
         controller: 'detailsCtrl',
         templateUrl: 'app/pages/home/details/details.tmpl.html',
         parent: angular.element(document.body),

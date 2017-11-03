@@ -5,7 +5,17 @@
   .controller('detailsCtrl', detailsCtrl);
   
   /* @ngInject */
-  function detailsCtrl($http, $rootScope, $scope, ProjectsService, $window, $mdDialog) {
+  function detailsCtrl($http, $rootScope, $scope, ProjectsService, $window, $mdDialog, project) {
+
+    $scope.project = project;
+    $scope.loaded = false;
+    ProjectsService.getProject(project.projectId, function(response) {
+      if (response.status === 200) {
+        $scope.projectAllData = response.data;
+        $scope.loaded = true;
+      }
+    });
+
     $scope.hide = function() {
       $mdDialog.hide();
     };
