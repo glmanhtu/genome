@@ -4,6 +4,6 @@
 
 angular.module('Genome')
     .constant('backendService', {
-        serviceUrl : 'http://35.192.54.89:8080',
+        serviceUrl : 'https://genome-api.glmanhtu.com',
         baseUrl : '/api'
     });
