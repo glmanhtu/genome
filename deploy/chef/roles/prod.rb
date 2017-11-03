@@ -28,7 +28,18 @@ default_attributes({
   	            "key"   =>  "private",
   	            "property"  =>  "private_ssh_key"
   	        }
-  	    }
+  	    },
+        "forward" => {
+            "enable"    =>  true,
+            "from"  =>  {
+                "host"  =>  "genome-api.glmanhtu.com",
+                "port"  =>  80
+            },
+            "to"    =>  {
+                "host"  =>  "http://127.0.0.1",
+                "port"  =>  8080
+            }
+        }
   	},
     "nodejs-deploy" => {
          "application"   =>  {
@@ -36,7 +47,7 @@ default_attributes({
          },
          "server"    =>  {
              "root"  =>  "/usr/local/nodejs-deploy/genome-source-root",
-             "host_name" =>  "35.192.54.89",
+             "host_name" =>  "genome.glmanhtu.com",
              "port"  =>  80
          },
          "profile"   =>  "prod",
