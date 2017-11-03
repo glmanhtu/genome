@@ -39,7 +39,7 @@ default_attributes({
              "host_name" =>  "35.192.54.89",
              "port"  =>  80
          },
-         "profile"   =>  "development",
+         "profile"   =>  "prod",
          "build" =>  {
              "max_memory"    =>  750
          },
