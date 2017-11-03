@@ -50,7 +50,7 @@ default_attributes({
              "host_name" =>  "genome.glmanhtu.com",
              "port"  =>  80
          },
-         "profile"   =>  "development",
+         "profile"   =>  "prod",
          "build" =>  {
              "max_memory"    =>  750
          },
