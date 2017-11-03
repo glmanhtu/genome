@@ -3,9 +3,9 @@
 
     angular.module('Genome.theme.components')
         .controller('searchbarCtrl', searchbarCtrl);
-    searchbarCtrl.$inject = ['$rootScope', '$scope', '$state', '$location', 'toastr', 'DOMAIN_URL'];
+    searchbarCtrl.$inject = ['$rootScope', '$scope', '$state', '$location'];
     /** @ngInject */
-    function searchbarCtrl($rootScope, $scope, $state, $location, toastr) {
+    function searchbarCtrl($rootScope, $scope, $state, $location) {
     }
 
 })();

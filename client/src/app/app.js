@@ -3,7 +3,6 @@
     angular
         .module('Genome', [
         	'ngMaterial',
-            'toastr',
             'ui.router',
             'bw.paging',
             'Genome.pages',
@@ -11,6 +10,6 @@
         ])
         .run(run);
 
-    function run($rootScope, $location, $http, toastr) {
+    function run($rootScope, $location, $http) {
     }    
 })();

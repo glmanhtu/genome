@@ -5,11 +5,12 @@
   .controller('homeCtrl', homeCtrl);
   
   /* @ngInject */
-  function homeCtrl($http, $timeout, $scope, PagerService, ProjectsService) {
+  function homeCtrl($http, $rootScope, $scope, ProjectsService, $window, $mdDialog) {
     $scope.toggleSearch = false;
     $scope.count = 15;   
     $scope.tablePage = 0;    
     $scope.totalItems = 0;
+    $scope.litmitLongString = 120;
     $scope.headers = [
       {
         name:'',
@@ -36,11 +37,13 @@
         if ($scope.sortable.indexOf(field) > -1) { return true; } else { return false; }
     };
     $scope.order = function(predicate, reverse) {
+
         $scope.predicate = {predicate: predicate, reverse: reverse};
         if (predicate == "taxonomyId") {
           predicate = "taxonomies";
-        }
-        ProjectsService.findAllStudies($scope.tablePage, $scope.count, predicate, reverse, function(response) {
+        }        
+        ProjectsService.findAllStudies($rootScope.currentSearchType, $rootScope.keyword, $scope.tablePage, $scope.count, 
+                                                predicate, reverse, function(response) {
           if (response.status === 200) {
             $scope.content = response.data.content;
             $scope.totalItems = response.data.totalElements;            
@@ -49,8 +52,29 @@
     };
     $scope.order($scope.sortable[0], true);    
     $scope.goToPage = function (page) {
+      $window.scrollTo(0, 0);
       $scope.tablePage = page;
       $scope.order($scope.predicate.predicate, $scope.predicate.reverse);
+    };
+
+    $rootScope.search = function() {
+      $scope.order($scope.predicate.predicate, $scope.predicate.reverse);
+    }
+
+    $scope.showAdvanced = function(ev) {
+      $mdDialog.show({
+        controller: 'detailsCtrl',
+        templateUrl: 'app/pages/home/details/details.tmpl.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: false
+      })
+      .then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
     };
   }
 })();
