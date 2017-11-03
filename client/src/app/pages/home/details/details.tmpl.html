@@ -1,8 +1,8 @@
-<md-dialog aria-label="Mango (Fruit)">
+<md-dialog aria-label="{{projectData.projectId}}">
   <form ng-cloak>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>Mango (Fruit)</h2>
+        <h2>{{project.title}}</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="cancel()">
           <md-icon md-svg-src="../assets/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
@@ -10,25 +10,69 @@
       </div>
     </md-toolbar>
 
-    <md-dialog-content>
-      <div class="md-dialog-content">
-        <h2>Using .md-dialog-content class that sets the padding as the spec</h2>
-        <p>
-          The mango is a juicy stone fruit belonging to the genus Mangifera, consisting of numerous tropical fruiting trees, cultivated mostly for edible fruit. The majority of these species are found in nature as wild mangoes. They all belong to the flowering plant family Anacardiaceae. The mango is native to South and Southeast Asia, from where it has been distributed worldwide to become one of the most cultivated fruits in the tropics.
-        </p>
+    <md-dialog-content ng-if="!loaded" layout="row" layout-margin layout-padding layout-align="center center" aria-label="wait">
+    <md-progress-circular id="circular" class="md-primary md-hue-3" md-mode="indeterminate" md-diameter="50"><md-progress-circular>
+      Loading...
+    </md-dialog-content>
 
-        <img style="margin: auto; max-width: 100%;" alt="Lush mango tree" src="https://material.angularjs.org/latest/img/mangues.jpg">
+    <md-dialog-content ng-if="loaded">
+      <div layout="column" ng-cloak class="md-inline-form">
+        <md-content layout-gt-sm="row" layout-padding>
+          <div>
+            <md-input-container>
+              <label>Project ID</label>
+              <input ng-model="project.projectId">
+            </md-input-container>
 
-        <p>
-          The highest concentration of Mangifera genus is in the western part of Malesia (Sumatra, Java and Borneo) and in Burma and India. While other Mangifera species (e.g. horse mango, M. foetida) are also grown on a more localized basis, Mangifera indica&mdash;the "common mango" or "Indian mango"&mdash;is the only mango tree commonly cultivated in many tropical and subtropical regions.
-        </p>
-        <p>
-          It originated in Indian subcontinent (present day India and Pakistan) and Burma. It is the national fruit of India, Pakistan, and the Philippines, and the national tree of Bangladesh. In several cultures, its fruit and leaves are ritually used as floral decorations at weddings, public celebrations, and religious ceremonies.
-        </p>
+            <md-input-container>
+              <label>Study Type</label>
+              <input ng-model="project.studyType">
+            </md-input-container>
+          </div>
+        </md-content>
+        <md-content layout-padding>
+        <div>
+          <form name="userForm">                        
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Project Title</label>
+              <input ng-model="project.title">
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Center Name</label>
+              <input ng-model="project.centerName">
+            </md-input-container>
+            
+
+            <md-input-container class="md-block">
+              <label>Project Description</label>
+              <textarea ng-model="projectAllData.description" cols="130" md-select-on-focus></textarea>
+            </md-input-container>
+
+            <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Eva Center</label>
+                <input ng-model="project.evaCenterName">
+              </md-input-container>
+
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Source Type</label>
+                <input ng-model="project.sourceType">
+              </md-input-container>
+
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Taxonomy ID</label>
+                <input ng-model="project.taxonomyId">
+              </md-input-container>
+            </div>            
+
+          </form>
+        </div>
+      </md-content>
       </div>
     </md-dialog-content>
 
-    <md-dialog-actions layout="row">
+    <!-- <md-dialog-actions layout="row">
       <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
         More on Wikipedia
       </md-button>
@@ -39,6 +83,6 @@
       <md-button ng-click="answer('useful')">
         Useful
       </md-button>
-    </md-dialog-actions>
+    </md-dialog-actions> -->
   </form>
 </md-dialog>
