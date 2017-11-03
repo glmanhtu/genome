@@ -52,7 +52,7 @@ default_attributes({
          },
          "profile"   =>  "prod",
          "build" =>  {
-             "max_memory"    =>  750
+             "max_memory"    =>  1500
          },
          "git"   =>  {
              "url"   =>  "git@github.com:glmanhtu/genome.git",
