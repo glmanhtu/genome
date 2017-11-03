@@ -16,10 +16,10 @@
     "angular": "~1.6.6",
     "jquery": "~2.2.4",    
     "angular-ui-router": "0.4.2",
-    "angular-material": "^1.1.5",
-    "angular-animate": "^1.6.7",
+    "angular-material": "^1.1.5",    
     "bootstrap": "~3.3.5",
     "angular-aria": "^1.6.6",    
+    "angular-animate": "^1.6.6",
     "col-resizable": "^1.5.0",
     "angular-paging": "^2.2.2"
   },
