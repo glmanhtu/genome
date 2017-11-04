@@ -7,8 +7,6 @@
     /** @ngInject */
     function navigationCtrl($rootScope, $scope, $location, $http, $mdDialog) {
 
-    	var originatorEv;
-
 		$scope.searchTypes = [
 			{
 				name: "Study Type",
@@ -34,8 +32,7 @@
 			$rootScope.currentSearchType = searchType;
 		}
 
-		$scope.openMenu = function($mdMenu, ev) {
-	      	originatorEv = ev;
+		$scope.openMenu = function($mdMenu, ev) {	      	
 	      	$mdMenu.open(ev);
 	    };
 
