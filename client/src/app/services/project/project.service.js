@@ -13,8 +13,39 @@
         service.getProject = getProject;
         service.createProject = createProject;
         service.updateProject = updateProject;
+        service.deleteProject = deleteProject;
 
         return service;
+
+
+        function deleteProject(projectId, callback) {
+            LoadingService.startLoading();
+            $http({
+                method: "DELETE",
+                url: backendService.serviceUrl
+                    +   backendService.baseUrl
+                    +   '/studies/' + projectId,
+                headers:{
+                    'Content-Type':'application/json; charset=UTF-8'
+                },                
+                contentType: "application/json"                
+            })
+            .then(function (response) {  
+                LoadingService.stopLoading();              
+                callback({
+                    success: true,
+                    data: response.data,
+                    status: response.status
+                });
+            }, function (response) {         
+                LoadingService.stopLoading();          
+                callback({
+                    success: false,
+                    data: response.data,
+                    message: response.data.message
+                });
+            });
+        }
 
         function updateProject(project, callback) {
             $http({

@@ -5,7 +5,7 @@
   .controller('homeCtrl', homeCtrl);
   
   /* @ngInject */
-  function homeCtrl($http, $rootScope, $scope, ProjectService, $window, $mdDialog) {
+  function homeCtrl($http, $rootScope, $scope, ProjectService, $window, $mdDialog, $mdToast) {
     $scope.toggleSearch = false;
     $scope.count = 15;   
     $scope.tablePage = 0;    
@@ -61,6 +61,42 @@
       $scope.order($scope.predicate.predicate, $scope.predicate.reverse);
     }
 
+    $scope.deleteProject = function(ev, project) {
+      var confirm = $mdDialog.confirm()
+          .title('Are you sure you want to delete project ' + project.projectId)
+          .textContent('Once deleted, we can\'t recover back anymore!')
+          .ariaLabel('Delete project')
+          .targetEvent(ev)
+          .ok('Please do it!')
+          .cancel('Maybe another time');
+
+      $mdDialog.show(confirm).then(function() {
+        ProjectService.deleteProject(project.projectId, function(response) {
+          if (response.status === 200) {
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent('Project ' + project.projectId + ' deleted!')
+                .position("top right")
+                .hideDelay(3000)
+            );
+            $scope.content = $scope.content.filter(function(item) { 
+                return item.projectId !== project.projectId
+            });
+            $mdDialog.hide();      
+          } else {          
+            var message = response.message;          
+            $mdToast.show(
+              $mdToast.simple()
+                .textContent('Error!, ' + message)
+                .position("top right")
+                .hideDelay(3000)
+            );
+          }        
+        });
+      }, function() {        
+      });      
+    }
+
     $scope.updateProject = function(ev, project) {
       $mdDialog.show({
         locals: { project: project, mode: 2},
@@ -70,11 +106,6 @@
         targetEvent: ev,
         clickOutsideToClose:true,
         fullscreen: false
-      })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
       });
     }
 
@@ -87,11 +118,6 @@
         targetEvent: ev,
         clickOutsideToClose:true,
         fullscreen: false
-      })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
       });
     };
   }

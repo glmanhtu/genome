@@ -49,4 +49,8 @@ public class ProjectService {
     public Project updateProject(Project project) {
         return projectRepository.save(project);
     }
+
+    public void deleteProject(Project project) {
+        projectRepository.delete(project);
+    }
 }
