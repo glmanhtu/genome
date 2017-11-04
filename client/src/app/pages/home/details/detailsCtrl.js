@@ -5,12 +5,11 @@
   .controller('detailsCtrl', detailsCtrl);
   
   /* @ngInject */
-  function detailsCtrl($http, $rootScope, $scope, ProjectService, $window, $mdDialog, project, editMode) {    
+  function detailsCtrl($http, $rootScope, $scope, ProjectService, TaxonomyService, $window, $mdDialog, project, editMode) {    
     $scope.loaded = false;
     $scope.editMode = editMode;
-    if (editMode == true) {
-      $scope.project = {};
-    } else {
+    $scope.project = {};
+    if (editMode != true) {
       $scope.project = project;
       ProjectService.getProject(project.projectId, function(response) {
         if (response.status === 200) {
@@ -19,6 +18,11 @@
         }
       });
     }        
+    TaxonomyService.findAllTaxonomy(function(response) {
+      if (response.status === 200) {
+        $scope.taxonomies = response.data;
+      }
+    });
 
     $scope.hide = function() {
       $mdDialog.hide();

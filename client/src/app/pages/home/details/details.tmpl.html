@@ -59,10 +59,14 @@
                 <label>Source Type</label>
                 <input ng-model="project.sourceType">
               </md-input-container>
-
+              
               <md-input-container class="md-block" flex-gt-sm>
-                <label>Taxonomy ID</label>
-                <input ng-model="project.taxonomyId">
+                <label>Taxonomy</label>
+                <md-select ng-model="project.taxonomyId">                  
+                  <md-option ng-repeat="taxonomy in taxonomies" ng-value="taxonomy.taxonomyId">
+                    {{taxonomy.taxonomyId}} - {{taxonomy.taxonomyCommonName}}
+                  </md-option>
+                </md-select>
               </md-input-container>
             </div>            
 
@@ -72,10 +76,7 @@
       </div>
     </md-dialog-content>
 
-    <md-dialog-actions layout="row" ng-if="editMode">
-      <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
-        More on Wikipedia
-      </md-button>
+    <md-dialog-actions layout="row" ng-if="editMode">      
       <span flex></span>
       <md-button ng-click="answer('not useful')">
        Reset
