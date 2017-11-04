@@ -1,5 +1,6 @@
-package com.ebi.genome.exceptions;
+package com.ebi.genome.restapi;
 
+import com.ebi.genome.exceptions.IllegalException;
 import com.ebi.genome.utils.Message;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @ControllerAdvice
-public class GlobalException {
+public class GlobalExceptionHandler {
 
     private static final Integer CODE_302 = 302;
 

@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class ProjectNotFound extends GenomeException {
+public class ProjectAlreadyExists extends GenomeException {
 
-    public ProjectNotFound() {
-        super("Project not found");
+    public ProjectAlreadyExists() {
+        super("Project already exists");
     }
 }

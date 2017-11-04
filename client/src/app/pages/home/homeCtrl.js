@@ -63,7 +63,7 @@
 
     $scope.showAdvanced = function(ev, project) {
       $mdDialog.show({
-        locals: { project: project, editMode: false},
+        locals: { project: project, mode: 0},
         controller: 'detailsCtrl',
         templateUrl: 'app/pages/home/details/details.tmpl.html',
         parent: angular.element(document.body),

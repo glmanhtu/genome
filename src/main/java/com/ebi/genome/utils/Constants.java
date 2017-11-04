@@ -5,5 +5,5 @@ package com.ebi.genome.utils;
  */
 public interface Constants {
     int MILISECOND = 1000;
-    int DEFAULT_LIMIT_FEEDBACK = 10;
+    String TRANS_ID = "TRANS_ID";
 }

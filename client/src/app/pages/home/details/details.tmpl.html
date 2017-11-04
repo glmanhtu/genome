@@ -2,20 +2,20 @@
   <form ng-cloak>
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>{{project.title}}</h2>
+        <h2>{{title}}</h2>
         <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
+        <md-button class="md-icon-button" ng-click="hide()">
           <md-icon md-svg-src="../assets/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
         </md-button>
       </div>
     </md-toolbar>
 
-    <md-dialog-content ng-if="!loaded && !editMode" layout="row" layout-margin layout-padding layout-align="center center" aria-label="wait">
+    <md-dialog-content ng-if="!loaded" layout="row" layout-margin layout-padding layout-align="center center" aria-label="wait">
     <md-progress-circular id="circular" class="md-primary md-hue-3" md-mode="indeterminate" md-diameter="50"><md-progress-circular>
       Loading...
     </md-dialog-content>
 
-    <md-dialog-content ng-if="loaded || editMode">
+    <md-dialog-content ng-if="loaded">
       <div layout="column" ng-cloak class="md-inline-form">
         <md-content layout-gt-sm="row" layout-padding>
           <div>
@@ -46,7 +46,7 @@
 
             <md-input-container class="md-block">
               <label>Project Description</label>
-              <textarea ng-model="projectAllData.description" cols="130" md-select-on-focus></textarea>
+              <textarea ng-model="project.description" cols="130" md-select-on-focus></textarea>
             </md-input-container>
 
             <div layout-gt-sm="row">
@@ -76,13 +76,23 @@
       </div>
     </md-dialog-content>
 
-    <md-dialog-actions layout="row" ng-if="editMode">      
+    <md-dialog-actions layout="row" ng-if="mode == 1">      
+      <span flex></span>
+      <md-button ng-click="answer('not useful')">
+       Reset
+      </md-button>
+      <md-button ng-click="createNewProject()" class="md-raised md-primary">
+        Create Project
+      </md-button>
+    </md-dialog-actions>
+
+    <md-dialog-actions layout="row" ng-if="mode == 2">      
       <span flex></span>
       <md-button ng-click="answer('not useful')">
        Reset
       </md-button>
       <md-button ng-click="answer('useful')" class="md-raised md-primary">
-        Create Project
+        Update Project
       </md-button>
     </md-dialog-actions>
   </form>

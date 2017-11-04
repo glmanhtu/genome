@@ -7,8 +7,6 @@
     /** @ngInject */
     function navigationCtrl($rootScope, $scope, $location, $http, $mdDialog) {
 
-    	var originatorEv;
-
 		$scope.searchTypes = [
 			{
 				name: "Study Type",
@@ -34,14 +32,13 @@
 			$rootScope.currentSearchType = searchType;
 		}
 
-		$scope.openMenu = function($mdMenu, ev) {
-	      	originatorEv = ev;
+		$scope.openMenu = function($mdMenu, ev) {	      	
 	      	$mdMenu.open(ev);
 	    };
 
 	    $scope.createProject = function(ev) {
 	    	$mdDialog.show({
-		        locals: {project: null, editMode: true},
+		        locals: {project: null, mode: 1},
 		        controller: 'detailsCtrl',
 		        templateUrl: 'app/pages/home/details/details.tmpl.html',
 		        parent: angular.element(document.body),
