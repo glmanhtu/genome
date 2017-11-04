@@ -3,9 +3,12 @@
 
     angular.module('Genome.theme.components')
         .controller('navigationCtrl', navigationCtrl);
-        navigationCtrl.$inject = ['$rootScope', '$scope', '$location', '$http'];
+
     /** @ngInject */
-    function navigationCtrl($rootScope, $scope, $location, $http) {
+    function navigationCtrl($rootScope, $scope, $location, $http, $mdDialog) {
+
+    	var originatorEv;
+
 		$scope.searchTypes = [
 			{
 				name: "Study Type",
@@ -30,6 +33,28 @@
 		$scope.setCurrentSearchType = function(searchType) {
 			$rootScope.currentSearchType = searchType;
 		}
+
+		$scope.openMenu = function($mdMenu, ev) {
+	      	originatorEv = ev;
+	      	$mdMenu.open(ev);
+	    };
+
+	    $scope.createProject = function(ev) {
+	    	$mdDialog.show({
+		        locals: {project: null, editMode: true},
+		        controller: 'detailsCtrl',
+		        templateUrl: 'app/pages/home/details/details.tmpl.html',
+		        parent: angular.element(document.body),
+		        targetEvent: ev,
+		        clickOutsideToClose:true,
+		        fullscreen: false
+	      	})
+	      	.then(function(answer) {
+		        $scope.status = 'You said the information was "' + answer + '".';
+	      	}, function() {
+		        $scope.status = 'You cancelled the dialog.';
+	      	});
+	    }
     }
 
 })();

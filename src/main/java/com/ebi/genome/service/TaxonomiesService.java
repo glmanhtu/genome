@@ -1,17 +1,23 @@
 package com.ebi.genome.service;
 
-import com.ebi.genome.persistence.domain.Taxonomies;
-import com.ebi.genome.persistence.repository.TaxonomiesRepository;
+import com.ebi.genome.persistence.domain.Taxonomy;
+import com.ebi.genome.persistence.repository.TaxonomyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TaxonomiesService {
 
     @Autowired
-    private TaxonomiesRepository taxonomiesRepository;
+    private TaxonomyRepository taxonomyRepository;
 
-    public Taxonomies getTaxonomies(int taxonomiesId) {
-        return taxonomiesRepository.findOne(taxonomiesId);
+    public Taxonomy getTaxonomy(int taxonomiesId) {
+        return taxonomyRepository.findOne(taxonomiesId);
+    }
+
+    public List<Taxonomy> getTaxonomies() {
+        return taxonomyRepository.findAll();
     }
 }

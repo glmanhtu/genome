@@ -5,9 +5,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Projects {
+@Table(name = "projects")
+public class Project {
 
     @Id
     private String projectId;
@@ -27,7 +29,7 @@ public class Projects {
 
     @ManyToOne
     @JoinColumn(name = "taxonomy_id", referencedColumnName = "taxonomyId")
-    private Taxonomies taxonomies;
+    private Taxonomy taxonomy;
 
     public String getProjectId() {
         return projectId;
@@ -85,17 +87,17 @@ public class Projects {
         this.centerName = centerName;
     }
 
-    public Taxonomies getTaxonomies() {
-        return taxonomies;
+    public Taxonomy getTaxonomy() {
+        return taxonomy;
     }
 
-    public void setTaxonomies(Taxonomies taxonomies) {
-        this.taxonomies = taxonomies;
+    public void setTaxonomy(Taxonomy taxonomy) {
+        this.taxonomy = taxonomy;
     }
 
     @Override
     public String toString() {
-        return "{\"Projects\":{"
+        return "{\"Project\":{"
                 + "\"projectId\":\"" + projectId + "\""
                 + ", \"title\":\"" + title + "\""
                 + ", \"description\":\"" + description + "\""
@@ -103,7 +105,7 @@ public class Projects {
                 + ", \"studyType\":\"" + studyType + "\""
                 + ", \"evaCenterName\":\"" + evaCenterName + "\""
                 + ", \"centerName\":\"" + centerName + "\""
-                + ", \"taxonomies\":" + taxonomies
+                + ", \"taxonomy\":" + taxonomy
                 + "}}";
     }
 }

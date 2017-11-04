@@ -5,7 +5,7 @@
   .controller('homeCtrl', homeCtrl);
   
   /* @ngInject */
-  function homeCtrl($http, $rootScope, $scope, ProjectsService, $window, $mdDialog) {
+  function homeCtrl($http, $rootScope, $scope, ProjectService, $window, $mdDialog) {
     $scope.toggleSearch = false;
     $scope.count = 15;   
     $scope.tablePage = 0;    
@@ -40,9 +40,9 @@
 
         $scope.predicate = {predicate: predicate, reverse: reverse};
         if (predicate == "taxonomyId") {
-          predicate = "taxonomies";
+          predicate = "taxonomy";
         }        
-        ProjectsService.findAllStudies($rootScope.currentSearchType, $rootScope.keyword, $scope.tablePage, $scope.count, 
+        ProjectService.findAllStudies($rootScope.currentSearchType, $rootScope.keyword, $scope.tablePage, $scope.count, 
                                                 predicate, reverse, function(response) {
           if (response.status === 200) {
             $scope.content = response.data.content;
@@ -63,7 +63,7 @@
 
     $scope.showAdvanced = function(ev, project) {
       $mdDialog.show({
-        locals: { project: project},
+        locals: { project: project, editMode: false},
         controller: 'detailsCtrl',
         templateUrl: 'app/pages/home/details/details.tmpl.html',
         parent: angular.element(document.body),
