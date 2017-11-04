@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,6 +86,13 @@ public class StudiesHandler {
         Project project = projectService.getProject(projectId);
         ProjectDTO projectDTO = convertToDTO(project);
         return DefaultResponse.success(projectDTO);
+    }
+
+    @DeleteMapping(value = "/{projectId}")
+    public ResponseEntity<?> deleteStudy(@PathVariable("projectId") String projectId) {
+        Project project = projectService.getProject(projectId);
+        projectService.deleteProject(project);
+        return DefaultResponse.success();
     }
 
     @PutMapping()
