@@ -61,6 +61,23 @@
       $scope.order($scope.predicate.predicate, $scope.predicate.reverse);
     }
 
+    $scope.updateProject = function(ev, project) {
+      $mdDialog.show({
+        locals: { project: project, mode: 2},
+        controller: 'detailsCtrl',
+        templateUrl: 'app/pages/home/details/details.tmpl.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        fullscreen: false
+      })
+      .then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
+    }
+
     $scope.showAdvanced = function(ev, project) {
       $mdDialog.show({
         locals: { project: project, mode: 0},
