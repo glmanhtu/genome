@@ -7,7 +7,7 @@ Documents
 ----------
 ### Tech
 
-Project uses a number of open source projects to work properly:
+Project uses a number of open source project to work properly:
 
 * [AngularJS] - HTML enhanced for web apps!
 * [SublimeText Editor] - is a sophisticated text editor for code, markup and prose.

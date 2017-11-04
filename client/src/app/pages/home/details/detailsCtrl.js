@@ -5,14 +5,22 @@
   .controller('detailsCtrl', detailsCtrl);
   
   /* @ngInject */
-  function detailsCtrl($http, $rootScope, $scope, ProjectsService, $window, $mdDialog, project) {
-
-    $scope.project = project;
+  function detailsCtrl($http, $rootScope, $scope, ProjectService, TaxonomyService, $window, $mdDialog, project, editMode) {    
     $scope.loaded = false;
-    ProjectsService.getProject(project.projectId, function(response) {
+    $scope.editMode = editMode;
+    $scope.project = {};
+    if (editMode != true) {
+      $scope.project = project;
+      ProjectService.getProject(project.projectId, function(response) {
+        if (response.status === 200) {
+          $scope.projectAllData = response.data;
+          $scope.loaded = true;
+        }
+      });
+    }        
+    TaxonomyService.findAllTaxonomy(function(response) {
       if (response.status === 200) {
-        $scope.projectAllData = response.data;
-        $scope.loaded = true;
+        $scope.taxonomies = response.data;
       }
     });
 

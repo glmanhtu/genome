@@ -26,9 +26,13 @@
     }
     #search-box {
       input {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.7);
         color: white;
         border: none;
-      }      
+      }
+      .form-control {
+        height: auto;
+        line-height: 1.44;
+      }
     }
 }

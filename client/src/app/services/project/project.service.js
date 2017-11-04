@@ -3,10 +3,10 @@
 
     angular
         .module('Genome')
-        .factory('ProjectsService', ProjectsService);
+        .factory('ProjectService', ProjectService);
     
     /* @ngInject */
-    function ProjectsService($http, backendService, LoadingService) {
+    function ProjectService($http, backendService, LoadingService) {
         var service = {};
 
         service.findAllStudies = findAllStudies;

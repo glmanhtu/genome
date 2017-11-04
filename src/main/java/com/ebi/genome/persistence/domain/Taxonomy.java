@@ -2,9 +2,11 @@ package com.ebi.genome.persistence.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Taxonomies {
+@Table(name = "taxonomies")
+public class Taxonomy {
 
     @Id
     private int taxonomyId;
@@ -39,7 +41,7 @@ public class Taxonomies {
 
     @Override
     public String toString() {
-        return "{\"Taxonomies\":{"
+        return "{\"Taxonomy\":{"
                 + "\"taxonomyId\":\"" + taxonomyId + "\""
                 + ", \"taxonomyCommonName\":\"" + taxonomyCommonName + "\""
                 + ", \"taxonomyScientificName\":\"" + taxonomyScientificName + "\""

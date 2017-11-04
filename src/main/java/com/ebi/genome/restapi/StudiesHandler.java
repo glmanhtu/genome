@@ -1,9 +1,9 @@
 package com.ebi.genome.restapi;
 
-import com.ebi.genome.persistence.domain.Projects;
-import com.ebi.genome.persistence.domain.Taxonomies;
-import com.ebi.genome.persistence.dto.ProjectsDTO;
-import com.ebi.genome.service.ProjectsService;
+import com.ebi.genome.persistence.domain.Project;
+import com.ebi.genome.persistence.domain.Taxonomy;
+import com.ebi.genome.persistence.dto.ProjectDTO;
+import com.ebi.genome.service.ProjectService;
 import com.ebi.genome.service.TaxonomiesService;
 import com.ebi.genome.utils.DefaultResponse;
 import org.modelmapper.ModelMapper;
@@ -26,7 +26,7 @@ import java.util.Collections;
 public class StudiesHandler {
 
     @Autowired
-    private ProjectsService projectsService;
+    private ProjectService projectService;
 
     @Autowired
     private TaxonomiesService taxonomiesService;
@@ -36,11 +36,11 @@ public class StudiesHandler {
 
     @GetMapping
     public ResponseEntity<?> findAllStudies(Pageable pageRequest) {
-        Page<Projects> projects = projectsService.getProjects(pageRequest);
-        Page<ProjectsDTO> projectsDTOs = projects.map(projects1 -> {
-            ProjectsDTO projectsDTO = convertToDTO(projects1);
-            projectsDTO.setDescription("");
-            return projectsDTO;
+        Page<Project> projects = projectService.getProjects(pageRequest);
+        Page<ProjectDTO> projectsDTOs = projects.map(project1 -> {
+            ProjectDTO projectDTO = convertToDTO(project1);
+            projectDTO.setDescription("");
+            return projectDTO;
         });
         return DefaultResponse.success(projectsDTOs);
     }
@@ -48,13 +48,13 @@ public class StudiesHandler {
     @GetMapping(params = {"taxonomyId"})
     public ResponseEntity<?> findAllStudiesByTaxonomyId(
             @RequestParam("taxonomyId") int taxonomyId, Pageable pageRequest) {
-        Taxonomies taxonomies = taxonomiesService.getTaxonomies(taxonomyId);
-        Page<Projects> projects = projectsService.getProjectsByTaxonomies(
-                Collections.singletonList(taxonomies), pageRequest);
-        Page<ProjectsDTO> projectsDTOs = projects.map(projects1 -> {
-            ProjectsDTO projectsDTO = convertToDTO(projects1);
-            projectsDTO.setDescription("");
-            return projectsDTO;
+        Taxonomy taxonomy = taxonomiesService.getTaxonomy(taxonomyId);
+        Page<Project> projects = projectService.getProjectsByTaxonomies(
+                Collections.singletonList(taxonomy), pageRequest);
+        Page<ProjectDTO> projectsDTOs = projects.map(project1 -> {
+            ProjectDTO projectDTO = convertToDTO(project1);
+            projectDTO.setDescription("");
+            return projectDTO;
         });
         return DefaultResponse.success(projectsDTOs);
     }
@@ -62,25 +62,25 @@ public class StudiesHandler {
     @GetMapping(params = {"studyType"})
     public ResponseEntity<?> findAllStudiesByStudyType(
             @RequestParam("studyType") String studyType, Pageable pageRequest) {
-        Page<Projects> projects = projectsService.getProjectsByStudyType(studyType, pageRequest);
-        Page<ProjectsDTO> projectsDTOs = projects.map(projects1 -> {
-            ProjectsDTO projectsDTO = convertToDTO(projects1);
-            projectsDTO.setDescription("");
-            return projectsDTO;
+        Page<Project> projects = projectService.getProjectsByStudyType(studyType, pageRequest);
+        Page<ProjectDTO> projectsDTOs = projects.map(project1 -> {
+            ProjectDTO projectDTO = convertToDTO(project1);
+            projectDTO.setDescription("");
+            return projectDTO;
         });
         return DefaultResponse.success(projectsDTOs);
     }
 
     @GetMapping(value = "/{projectsId}")
     public ResponseEntity<?> getStudy(@PathVariable("projectsId") String projectsId) {
-        Projects projects = projectsService.getProject(projectsId);
-        ProjectsDTO projectsDTO = convertToDTO(projects);
-        return DefaultResponse.success(projectsDTO);
+        Project project = projectService.getProject(projectsId);
+        ProjectDTO projectDTO = convertToDTO(project);
+        return DefaultResponse.success(projectDTO);
     }
 
-    private ProjectsDTO convertToDTO(Projects projects) {
-        ProjectsDTO projectsDTO = modelMapper.map(projects, ProjectsDTO.class);
-        projectsDTO.setTaxonomyId(projects.getTaxonomies().getTaxonomyId());
-        return projectsDTO;
+    private ProjectDTO convertToDTO(Project project) {
+        ProjectDTO projectDTO = modelMapper.map(project, ProjectDTO.class);
+        projectDTO.setTaxonomyId(project.getTaxonomy().getTaxonomyId());
+        return projectDTO;
     }
 }

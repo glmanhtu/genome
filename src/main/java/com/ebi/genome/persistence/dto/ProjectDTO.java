@@ -1,9 +1,9 @@
 package com.ebi.genome.persistence.dto;
 
 /**
- * Use to transfer object Projects over internet
+ * Use to transfer object Project over internet
  */
-public class ProjectsDTO {
+public class ProjectDTO {
 
     private String projectId;
 
@@ -87,7 +87,7 @@ public class ProjectsDTO {
 
     @Override
     public String toString() {
-        return "{\"ProjectsDTO\":{"
+        return "{\"ProjectDTO\":{"
                 + "\"projectId\":\"" + projectId + "\""
                 + ", \"title\":\"" + title + "\""
                 + ", \"description\":\"" + description + "\""

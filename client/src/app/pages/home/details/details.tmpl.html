@@ -10,12 +10,12 @@
       </div>
     </md-toolbar>
 
-    <md-dialog-content ng-if="!loaded" layout="row" layout-margin layout-padding layout-align="center center" aria-label="wait">
+    <md-dialog-content ng-if="!loaded && !editMode" layout="row" layout-margin layout-padding layout-align="center center" aria-label="wait">
     <md-progress-circular id="circular" class="md-primary md-hue-3" md-mode="indeterminate" md-diameter="50"><md-progress-circular>
       Loading...
     </md-dialog-content>
 
-    <md-dialog-content ng-if="loaded">
+    <md-dialog-content ng-if="loaded || editMode">
       <div layout="column" ng-cloak class="md-inline-form">
         <md-content layout-gt-sm="row" layout-padding>
           <div>
@@ -59,10 +59,14 @@
                 <label>Source Type</label>
                 <input ng-model="project.sourceType">
               </md-input-container>
-
+              
               <md-input-container class="md-block" flex-gt-sm>
-                <label>Taxonomy ID</label>
-                <input ng-model="project.taxonomyId">
+                <label>Taxonomy</label>
+                <md-select ng-model="project.taxonomyId">                  
+                  <md-option ng-repeat="taxonomy in taxonomies" ng-value="taxonomy.taxonomyId">
+                    {{taxonomy.taxonomyId}} - {{taxonomy.taxonomyCommonName}}
+                  </md-option>
+                </md-select>
               </md-input-container>
             </div>            
 
@@ -72,17 +76,14 @@
       </div>
     </md-dialog-content>
 
-    <!-- <md-dialog-actions layout="row">
-      <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
-        More on Wikipedia
-      </md-button>
+    <md-dialog-actions layout="row" ng-if="editMode">      
       <span flex></span>
       <md-button ng-click="answer('not useful')">
-       Not Useful
+       Reset
       </md-button>
-      <md-button ng-click="answer('useful')">
-        Useful
+      <md-button ng-click="answer('useful')" class="md-raised md-primary">
+        Create Project
       </md-button>
-    </md-dialog-actions> -->
+    </md-dialog-actions>
   </form>
 </md-dialog>
