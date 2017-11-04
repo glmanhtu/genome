@@ -36,4 +36,17 @@ public class ProjectService {
         }
         return project;
     }
+
+    public boolean isProjectExists(String projectId) {
+        Project project = projectRepository.findOne(projectId);
+        return project != null;
+    }
+
+    public Project createProject(Project project) {
+        return projectRepository.save(project);
+    }
+
+    public Project updateProject(Project project) {
+        return projectRepository.save(project);
+    }
 }

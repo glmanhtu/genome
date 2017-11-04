@@ -1,24 +1,41 @@
 package com.ebi.genome.persistence.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * Use to transfer object Project over internet
  */
 public class ProjectDTO {
 
+    @Size(min = 5, max = 255)
+    @NotNull
     private String projectId;
 
+    @Size(min = 5, max = 255)
+    @NotNull
     private String title;
 
+    @Size(max = 5000)
+    @NotNull
     private String description;
 
+    @Size(min = 5, max = 255)
+    @NotNull
     private String sourceType;
 
+    @Size(min = 5, max = 255)
+    @NotNull
     private String studyType;
 
+    @Size(max = 255)
     private String evaCenterName;
 
+    @Size(min = 5, max = 255)
+    @NotNull
     private String centerName;
 
+    @NotNull
     private int taxonomyId;
 
     public String getProjectId() {

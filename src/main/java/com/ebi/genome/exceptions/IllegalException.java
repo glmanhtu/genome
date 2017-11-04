@@ -2,10 +2,7 @@ package com.ebi.genome.exceptions;
 
 import com.ebi.genome.utils.Message;
 
-/**
- * Created by greenlucky on 4/14/17.
- */
-public class IllegalException extends RuntimeException {
+public class IllegalException extends GenomeException {
 
     private String message;
     private int code;

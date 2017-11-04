@@ -1,5 +1,6 @@
 package com.ebi.genome.restapi;
 
+import com.ebi.genome.exceptions.project.ProjectAlreadyExists;
 import com.ebi.genome.persistence.domain.Project;
 import com.ebi.genome.persistence.domain.Taxonomy;
 import com.ebi.genome.persistence.dto.ProjectDTO;
@@ -7,6 +8,8 @@ import com.ebi.genome.service.ProjectService;
 import com.ebi.genome.service.TaxonomiesService;
 import com.ebi.genome.utils.DefaultResponse;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,10 +17,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Collections;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -33,6 +40,8 @@ public class StudiesHandler {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(StudiesHandler.class);
 
     @GetMapping
     public ResponseEntity<?> findAllStudies(Pageable pageRequest) {
@@ -71,11 +80,54 @@ public class StudiesHandler {
         return DefaultResponse.success(projectsDTOs);
     }
 
-    @GetMapping(value = "/{projectsId}")
-    public ResponseEntity<?> getStudy(@PathVariable("projectsId") String projectsId) {
-        Project project = projectService.getProject(projectsId);
+    @GetMapping(value = "/{projectId}")
+    public ResponseEntity<?> getStudy(@PathVariable("projectId") String projectId) {
+        Project project = projectService.getProject(projectId);
         ProjectDTO projectDTO = convertToDTO(project);
         return DefaultResponse.success(projectDTO);
+    }
+
+    @PutMapping()
+    public ResponseEntity<?> updateStudy(@Valid @RequestBody ProjectDTO projectDTO) {
+        LOGGER.debug("Updating project {}", projectDTO);
+        LOGGER.debug("Step 1/4");
+        Project project = projectService.getProject(projectDTO.getProjectId());
+        LOGGER.debug("Step 2/4");
+        Taxonomy taxonomy = taxonomiesService.getTaxonomy(projectDTO.getTaxonomyId());
+        LOGGER.debug("Step 3/4");
+        project.setTaxonomy(taxonomy);
+        project.setCenterName(projectDTO.getCenterName());
+        project.setDescription(projectDTO.getDescription());
+        project.setEvaCenterName(projectDTO.getEvaCenterName());
+        project.setSourceType(projectDTO.getSourceType());
+        project.setStudyType(projectDTO.getStudyType());
+        project.setTitle(projectDTO.getTitle());
+        LOGGER.debug("Step 4/4");
+        project = projectService.updateProject(project);
+        LOGGER.debug("Updated project");
+        return DefaultResponse.success(project);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> createStudy(@Valid @RequestBody ProjectDTO projectDTO) {
+        LOGGER.debug("Creating new project {}", projectDTO);
+        LOGGER.debug("Step 1/4");
+        if (projectService.isProjectExists(projectDTO.getProjectId())) {
+            throw new ProjectAlreadyExists();
+        }
+
+        LOGGER.debug("Step 2/4");
+        Project project = modelMapper.map(projectDTO, Project.class);
+
+        LOGGER.debug("Step 3/4");
+        Taxonomy taxonomy = taxonomiesService.getTaxonomy(projectDTO.getTaxonomyId());
+        project.setTaxonomy(taxonomy);
+
+        LOGGER.debug("Step 4/4");
+        project = projectService.createProject(project);
+
+        LOGGER.debug("Created new project");
+        return DefaultResponse.success(project);
     }
 
     private ProjectDTO convertToDTO(Project project) {

@@ -41,7 +41,7 @@
 
 	    $scope.createProject = function(ev) {
 	    	$mdDialog.show({
-		        locals: {project: null, editMode: true},
+		        locals: {project: null, mode: 1},
 		        controller: 'detailsCtrl',
 		        templateUrl: 'app/pages/home/details/details.tmpl.html',
 		        parent: angular.element(document.body),
