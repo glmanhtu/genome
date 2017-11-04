@@ -34,6 +34,33 @@
       $mdDialog.hide();
     };
 
+    $scope.updateProject = function() {
+      $scope.loaded = false;
+      ProjectService.updateProject($scope.project, function(response) {
+        if (response.status === 200) {
+          $mdToast.show(
+            $mdToast.simple()
+              .textContent('Project ' + $scope.project.projectId + ' updated!')
+              .position("top right")
+              .hideDelay(3000)
+          );    
+          $mdDialog.hide();      
+        } else {
+          $scope.loaded = true;
+          var message = response.message;
+          if (response.message == "validation error") {
+            message = response.data.fieldErrors[0].objectName + " " + response.data.fieldErrors[0].field;
+          }
+          $mdToast.show(
+            $mdToast.simple()
+              .textContent('Error!, ' + message)
+              .position("top right")
+              .hideDelay(3000)
+          );
+        }        
+      });
+    }
+
     $scope.createNewProject = function() {
       $scope.loaded = false;
       ProjectService.createProject($scope.project, function(response) {
@@ -58,7 +85,7 @@
               .hideDelay(3000)
           );
         }        
-      })
+      });
     }
   }
 })();

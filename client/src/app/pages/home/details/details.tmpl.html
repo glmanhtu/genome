@@ -21,7 +21,8 @@
           <div>
             <md-input-container>
               <label>Project ID</label>
-              <input ng-model="project.projectId">
+              <input ng-model="project.projectId" ng-if="mode != 2">
+              <input ng-model="project.projectId" ng-if="mode == 2" readonly="true">
             </md-input-container>
 
             <md-input-container>
@@ -76,7 +77,7 @@
       </div>
     </md-dialog-content>
 
-    <md-dialog-actions layout="row" ng-if="mode == 1">      
+    <md-dialog-actions layout="row" ng-if="mode == 1 && loaded">      
       <span flex></span>
       <md-button ng-click="answer('not useful')">
        Reset
@@ -86,12 +87,12 @@
       </md-button>
     </md-dialog-actions>
 
-    <md-dialog-actions layout="row" ng-if="mode == 2">      
+    <md-dialog-actions layout="row" ng-if="mode == 2 && loaded">      
       <span flex></span>
       <md-button ng-click="answer('not useful')">
        Reset
       </md-button>
-      <md-button ng-click="answer('useful')" class="md-raised md-primary">
+      <md-button ng-click="updateProject()" class="md-raised md-primary">
         Update Project
       </md-button>
     </md-dialog-actions>

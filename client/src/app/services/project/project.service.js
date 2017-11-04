@@ -12,8 +12,45 @@
         service.findAllStudies = findAllStudies;
         service.getProject = getProject;
         service.createProject = createProject;
+        service.updateProject = updateProject;
 
         return service;
+
+        function updateProject(project, callback) {
+            $http({
+                method: "PUT",
+                url: backendService.serviceUrl
+                    +   backendService.baseUrl
+                    +   '/studies',
+                headers:{
+                    'Content-Type':'application/json; charset=UTF-8'
+                },
+                data: JSON.stringify({
+                    projectId: project.projectId,
+                    title: project.title,
+                    description: project.description,
+                    sourceType: project.sourceType,
+                    studyType: project.studyType,
+                    evaCenterName: project.evaCenterName,
+                    centerName: project.centerName,
+                    taxonomyId: project.taxonomyId
+                }),
+                contentType: "application/json"                
+            })
+            .then(function (response) {                
+                callback({
+                    success: true,
+                    data: response.data,
+                    status: response.status
+                });
+            }, function (response) {                   
+                callback({
+                    success: false,
+                    data: response.data,
+                    message: response.data.message
+                });
+            });
+        }
 
         function createProject(project, callback) {
             $http({
