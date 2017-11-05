@@ -2,7 +2,7 @@ package com.ebi.genome.restapi;
 
 import com.ebi.genome.persistence.domain.Taxonomy;
 import com.ebi.genome.persistence.dto.TaxonomyDTO;
-import com.ebi.genome.service.TaxonomiesService;
+import com.ebi.genome.service.TaxonomyService;
 import com.ebi.genome.utils.DefaultResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +19,17 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/taxonomy")
-public class TaxonomyHandler {
+public class TaxonomyController {
 
     @Autowired
-    private TaxonomiesService taxonomiesService;
+    private TaxonomyService taxonomyService;
 
     @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping
     public ResponseEntity<?> findAllTaxonomies() {
-        Collection<Taxonomy> taxonomies = taxonomiesService.getTaxonomies();
+        Collection<Taxonomy> taxonomies = taxonomyService.getTaxonomies();
         List<TaxonomyDTO> taxonomyDTOs = taxonomies.stream().map(this::convertToDTO).collect(Collectors.toList());
         return DefaultResponse.success(taxonomyDTOs);
     }

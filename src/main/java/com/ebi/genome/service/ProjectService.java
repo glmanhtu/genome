@@ -1,5 +1,6 @@
 package com.ebi.genome.service;
 
+import com.ebi.genome.exceptions.project.ProjectAlreadyExists;
 import com.ebi.genome.exceptions.project.ProjectNotFound;
 import com.ebi.genome.persistence.domain.Project;
 import com.ebi.genome.persistence.domain.Taxonomy;
@@ -43,14 +44,23 @@ public class ProjectService {
     }
 
     public Project createProject(Project project) {
+        if (isProjectExists(project.getProjectId())) {
+            throw new ProjectAlreadyExists();
+        }
         return projectRepository.save(project);
     }
 
     public Project updateProject(Project project) {
-        return projectRepository.save(project);
+        if (isProjectExists(project.getProjectId())) {
+            return projectRepository.save(project);
+        }
+        throw new ProjectNotFound();
     }
 
     public void deleteProject(Project project) {
-        projectRepository.delete(project);
+        if (isProjectExists(project.getProjectId())) {
+            projectRepository.delete(project);
+        }
+        throw new ProjectNotFound();
     }
 }

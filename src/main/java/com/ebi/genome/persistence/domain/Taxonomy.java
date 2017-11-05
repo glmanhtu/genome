@@ -40,6 +40,25 @@ public class Taxonomy {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Taxonomy taxonomy = (Taxonomy) o;
+
+        return taxonomyId == taxonomy.taxonomyId;
+    }
+
+    @Override
+    public int hashCode() {
+        return taxonomyId;
+    }
+
+    @Override
     public String toString() {
         return "{\"Taxonomy\":{"
                 + "\"taxonomyId\":\"" + taxonomyId + "\""
