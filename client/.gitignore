@@ -1,3 +1,6 @@
 .tmp/*
+target/*
 bower_components/*
+node_modules/*
+release/*
 !.gitignore
