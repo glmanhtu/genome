@@ -1,5 +1,9 @@
 {
   "name": "genome",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:glmanhtu/genome.git"
+  },
   "version": "1.0.0",
   "authors": [
     "VU Manh Tu"

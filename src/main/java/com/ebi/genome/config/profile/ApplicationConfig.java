@@ -1,4 +1,4 @@
-package com.ebi.genome.config;
+package com.ebi.genome.config.profile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
@@ -9,9 +9,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * Created by greenlucky on 1/14/17.
- */
 @Configuration
 @EnableAutoConfiguration
 @EnableSpringDataWebSupport

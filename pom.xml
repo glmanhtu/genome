@@ -136,7 +136,7 @@
             -->
             <resource>
                 <filtering>true</filtering>
-                <directory>src/main/resources</directory>
+                <directory>backend/src/main/resources</directory>
             </resource>
         </resources>
 
