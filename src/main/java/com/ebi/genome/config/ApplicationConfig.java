@@ -1,4 +1,4 @@
-package com.ebi.genome.config.profile;
+package com.ebi.genome.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
