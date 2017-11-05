@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionController {
 
     private static final Integer CODE_302 = 302;
 

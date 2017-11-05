@@ -17,7 +17,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
-public class MethodArgumentNotValidExceptionHandler {
+public class MethodArgumentNotValidExceptionController {
 
     @ResponseStatus(BAD_REQUEST)
     @ResponseBody

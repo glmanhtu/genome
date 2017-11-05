@@ -1,11 +1,10 @@
 package com.ebi.genome.restapi;
 
-import com.ebi.genome.exceptions.project.ProjectAlreadyExists;
 import com.ebi.genome.persistence.domain.Project;
 import com.ebi.genome.persistence.domain.Taxonomy;
 import com.ebi.genome.persistence.dto.ProjectDTO;
 import com.ebi.genome.service.ProjectService;
-import com.ebi.genome.service.TaxonomiesService;
+import com.ebi.genome.service.TaxonomyService;
 import com.ebi.genome.utils.DefaultResponse;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -31,18 +30,18 @@ import java.util.Collections;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/studies")
-public class StudiesHandler {
+public class StudiesController {
 
     @Autowired
     private ProjectService projectService;
 
     @Autowired
-    private TaxonomiesService taxonomiesService;
+    private TaxonomyService taxonomyService;
 
     @Autowired
     private ModelMapper modelMapper;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StudiesHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(StudiesController.class);
 
     @GetMapping
     public ResponseEntity<?> findAllStudies(Pageable pageRequest) {
@@ -58,7 +57,7 @@ public class StudiesHandler {
     @GetMapping(params = {"taxonomyId"})
     public ResponseEntity<?> findAllStudiesByTaxonomyId(
             @RequestParam("taxonomyId") int taxonomyId, Pageable pageRequest) {
-        Taxonomy taxonomy = taxonomiesService.getTaxonomy(taxonomyId);
+        Taxonomy taxonomy = taxonomyService.getTaxonomy(taxonomyId);
         Page<Project> projects = projectService.getProjectsByTaxonomies(
                 Collections.singletonList(taxonomy), pageRequest);
         Page<ProjectDTO> projectsDTOs = projects.map(project1 -> {
@@ -101,7 +100,7 @@ public class StudiesHandler {
         LOGGER.debug("Step 1/4");
         Project project = projectService.getProject(projectDTO.getProjectId());
         LOGGER.debug("Step 2/4");
-        Taxonomy taxonomy = taxonomiesService.getTaxonomy(projectDTO.getTaxonomyId());
+        Taxonomy taxonomy = taxonomyService.getTaxonomy(projectDTO.getTaxonomyId());
         LOGGER.debug("Step 3/4");
         project.setTaxonomy(taxonomy);
         project.setCenterName(projectDTO.getCenterName());
@@ -119,19 +118,15 @@ public class StudiesHandler {
     @PostMapping
     public ResponseEntity<?> createStudy(@Valid @RequestBody ProjectDTO projectDTO) {
         LOGGER.debug("Creating new project {}", projectDTO);
-        LOGGER.debug("Step 1/4");
-        if (projectService.isProjectExists(projectDTO.getProjectId())) {
-            throw new ProjectAlreadyExists();
-        }
+        LOGGER.debug("Step 1/3");
 
-        LOGGER.debug("Step 2/4");
         Project project = modelMapper.map(projectDTO, Project.class);
 
-        LOGGER.debug("Step 3/4");
-        Taxonomy taxonomy = taxonomiesService.getTaxonomy(projectDTO.getTaxonomyId());
+        LOGGER.debug("Step 2/3");
+        Taxonomy taxonomy = taxonomyService.getTaxonomy(projectDTO.getTaxonomyId());
         project.setTaxonomy(taxonomy);
 
-        LOGGER.debug("Step 4/4");
+        LOGGER.debug("Step 3/3");
         project = projectService.createProject(project);
 
         LOGGER.debug("Created new project");
