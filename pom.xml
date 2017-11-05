@@ -40,7 +40,7 @@
     <profiles>
         <!-- The Configuration of the development profile -->
         <profile>
-            <id>dev</id>
+            <id>prod</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -52,7 +52,7 @@
                     development profile is dev, we must set the value of the build.profile.id
                     property to dev.
                 -->
-                <build.profile.id>dev</build.profile.id>
+                <build.profile.id>prod</build.profile.id>
                 <!--
                     Only unit tests are run when the development profile is active
                 -->
@@ -136,7 +136,7 @@
             -->
             <resource>
                 <filtering>true</filtering>
-                <directory>backend/src/main/resources</directory>
+                <directory>src/main/resources</directory>
             </resource>
         </resources>
 

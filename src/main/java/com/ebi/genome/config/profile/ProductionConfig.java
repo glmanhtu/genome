@@ -1,4 +1,4 @@
-package com.ebi.genome.config;
+package com.ebi.genome.config.profile;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
