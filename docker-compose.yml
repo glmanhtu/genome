@@ -1,0 +1,25 @@
+version: '2'
+services:
+  genome-frontend:
+#    build: client/.  #in case rebuild
+    image: glmanhtu/genome-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - genome-backend
+  genome-backend:
+#    build: . #in case rebuild
+    image: glmanhtu/genome-backend
+    ports:
+          - "8080:8080"
+    depends_on:
+      - genome-db
+
+  genome-db:
+    build: db/.
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysqlroot
+      MYSQL_DATABASE: genome
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql

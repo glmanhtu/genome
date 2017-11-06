@@ -1,0 +1,33 @@
+.bold {
+  font-weight: 700;
+}
+
+.grey {
+  color: grey;
+}
+
+a {
+	&:hover, &:visited {
+		text-decoration: none;		
+	}
+	outline:none !important;
+  text-decoration: none !important;  
+}
+
+i {
+  vertical-align: middle;
+  font-size: 24px;
+}
+
+md-content {
+  overflow: visible;
+}
+
+.md-dialog-container {  
+  md-toolbar {
+    min-height: 48px;
+  }
+  .md-toolbar-tools {
+    height: 48px;
+  }
+}

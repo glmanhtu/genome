@@ -1,0 +1,260 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=1in,left=1.5in,includefoot]{geometry}
+% Graphic
+\usepackage{graphicx}
+\usepackage{float}
+
+% Hyperlinks
+\usepackage{hyperref}
+
+% Header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyhead[LE,RO]{\bfseries\thepage}
+\setlength{\headheight}{15pt}
+
+% Quotes character
+\usepackage[utf8]{inputenc}
+
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+%  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+% color links
+\usepackage{color}  
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+    urlcolor=blue
+}
+
+\begin{document}
+\begin{titlepage}
+	\begin{center}
+\includegraphics[width=0.6\textwidth]{images/Ebi_official_logo}\\[1cm]
+
+{\Large The report}\\[0.5cm]	
+	
+	\line(1,0){400}\\[0.2in]
+	\huge{\bfseries Genome Application}\\
+	\line(1,0){400}\\[1.5cm]
+	\noindent	
+	
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+	
+		\begin{center} \large
+    	\emph{Authors:}\\
+    	Vu Manh \textsc{Tu}\\
+		\end{center}
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+	\end{center}
+\end{titlepage}
+
+% Table content
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+
+\section{The application}
+Working web-based application URL: \url{https://genome.glmanhtu.com}\\\\
+Genome is a web-based application that archives genomics data and provides a friendly way to interact with those data.\\\\
+The application divide into two parts: one is backend application, which responsible for things like calculations, business logic, database interactions, performance and another is frontend application, which is what the user sees, touches and experiences.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\textwidth]{images/genome-overview}
+\caption{Genome application overview}
+\end{figure}
+
+\subsection{Order project studies}
+To order project studies by specific column, simply click to the column header and all result will be ordered as you expected.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\textwidth]{images/genome-order-2}
+\caption{Genome application order by title}
+\end{figure}
+
+\subsection{Paging project studies}
+Because we have a lot of project studies, so, if we call API and get all of them to display, the browser will be crash caused by lack of memory/cpu requirement. To avoid this problem, we implemented the Paging feature. The application will  fetch and display 15 items per page. When the user want to see more, just change the current page by click the page number button at the end of the result list.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\textwidth]{images/genome-paging}
+\caption{Genome application paging}
+\end{figure}
+
+\subsection{Filter project studies by Taxonomy ID}
+To filter project studies by Taxonomy ID, just click the search button at the top right of application. Select search by Taxonomy Id, insert the taxonomy id you want to filter to the next input box and press enter.\\
+Paging \& Order features are also work with this feature.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\textwidth]{images/genome-filter-taxonomy}
+\caption{Genome application filter by taxonomy id}
+\end{figure}
+
+\subsection{Filter project studies by Study Type}
+To filter project studies by Study Type, just click the search button at the top right of application. Select search by Study Type, insert the study type you want to filter to the next input box and press enter.\\
+Paging \& Order features are also work with this feature.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\textwidth]{images/genome-filter-studytype}
+\caption{Genome application filter by study type}
+\end{figure}
+
+\subsection{View a project study}
+To view a project study, click on the one you want from the list of project studies. A popup dialog with completed details of the project study will appear.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\textwidth]{images/genome-details}
+\caption{Genome application details of project study}
+\end{figure}
+
+\subsection{Create a project study}
+To create a project study, click the add button at the top left of the application. A popup dialog will appear for you to fill the project details form. Once you filled all fields, click Create Project to create. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\textwidth]{images/genome-create}
+\caption{Genome application create a new project study}
+\end{figure}
+
+The notification message will tell you whether your new project study created or not. It also let you know what mistake you made if a problem occurred.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\textwidth]{images/genome-create-notification}
+\caption{Genome application notification}
+\end{figure}
+
+\subsection{Update a project study}
+To update a project study, click on three-dot-button at the right of the one you want to update and select Update Project. A popup dialog with details of the project study will appear, you can change any fields (except projectId). Finally, click Update Project to update.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\textwidth]{images/genome-update}
+\caption{Genome application update a exist project study}
+\end{figure}
+
+\subsection{Delete a project study}
+To delete a project study, click on three-dot-button at the right of the one you want to update and select Delete Project. A confirm dialog will appear to make sure this isn't an acident. Click `Please Do It` to delete or `Maybe another time` to cancel.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.99\textwidth]{images/genome-delete}
+\caption{Genome application delete a exist project study}
+\end{figure}
+
+\section{Framework and programming language}
+\subsection{The frontend}
+AngularJS is my main framework (\url{www.angularjs.org}) because:
+\begin{itemize}
+	\item Angularjs require you to split your app into MVC components and then it manages your components for you and also serves as the pipeline that connects them.
+	\item Directives achieve this by enabling us to invent our own HTML elements. By putting all our DOM manipulation code into directives, we can separate them out of our MVC app. This allows our MVC app to only concern itself with updating the view with new data.
+	\item Filters filter the data before they reach the view and can involve something as simple as formatting decimal places on a number, reversing the order of an array, filtering an array based on a parameter, or implementing pagination. Filters are designed to be standalone functions that are separate from your app, similar to Directives, but are only concerned with data transformations.
+	\item All the points up till now mean that you get to write less code. You don’t have to write your own MVC pipeline. The view is defined using HTML, which is more concise. Data models are simpler to write without getters/setters. Data-binding means you don’t have to put data into the view manually. Since directives are separate from app code, they can be written by another team in parallel with minimal integration issues. Filters allow you to manipulate data on the view level without changing your controllers.
+	\item Services are exactly what they sound like. They don’t get involved with the MVC of your app, but simply provide an outward API to expose whatever you want it to expose. Most of the time it syncs up to a server to maintain an offline data store and exposes methods to push and pull data to and from a server. Or it can be used to create a resource sharing service that allows multiple controllers to share the same resources.
+	\item Data models in Angular are plain old JavaScript objects (POJO) and don’t require extraneous getter and setter functions. You can add and change properties directly on it and loop over objects and arrays at will. Your code will look much cleaner and more intuitive, the way mother nature intended.
+\end{itemize}
+I also applied some technicals to make the development and
+control project easier such as NPM to create a local server, Bower as package control, Gulp as automatic builder tool and SASS to control UI style.
+
+\subsection{API Docs}
+You can view and also test my APIs at \url{https://genome.docs.apiary.io}
+
+\subsection{The backend}
+I use Java Spring framework and java programming language because:
+\begin{itemize}
+	\item It's free.
+	\item Java Spring is MVC framework base on JavaEE and compatible a huge library of Java can use in this project without problem. In orther hand, Java Spring has supported from very lage Java Comunication. Which Java Spring framework (Spring Boot) was make easier and automatically to config system that help team save a lot of time and avoid errors.
+\end{itemize}
+
+\section{Deployment}
+I've been implemented both Chef and Docker because of easier for the specific type of users.  With the end-user, they can run direct this application by docker-compose while the developer can deploy their changes and see the result immediately via Chef.
+\subsection{Chef}
+With Chef Deployment, you can deploy your application, install all dependencies and  configure your clean new virtual private machine (VPS) with a single command. However, it require you to install \& configure Chef workstation. 
+\\
+\begin{lstlisting}[language=bash]
+  $ knife bootstrap <Ip of server> -N '<node name>' -r 'role[<environment>]' --ssh-user <user name on node> --sudo --ssh-identity-file <ssh private credential> --secret-file <location of secret file>
+\end{lstlisting}
+
+With `prod` environment, this command will check, install \& configure (if not exist):
+\begin{itemize}
+	\item \textbf{Oracle Java JDK}
+	\item \textbf{Git}: clone or pull changes from git repository
+	\item \textbf{Maven}: build project
+	\item \textbf{Nginx}: forward port for backend or web-server for frontend
+	\item \textbf{NodeJS}: build frontend
+\end{itemize}
+
+If your git repository is private, Chef also supports to inject private deploy key and encrypt it via the secret file.
+\\\\
+Once your VPS bootstrapped, you can easy to re-deploy to get your changes from git repository take effect by one of the following ways:
+\\
+\\
+\indent\textbf{Method 1}: Stay at your workstation and run the following command to re-deploy all your VPS:
+\begin{lstlisting}[language=bash]
+  $ knife ssh `name:*' `sudo chef-client'
+\end{lstlisting}
+
+\textbf{Method 2}: Connect to your VPS and type the following command:
+\begin{lstlisting}[language=bash]
+  $ sudo chef-client
+\end{lstlisting}
+\subsection{Docker}
+With Docker, you just need to move the terminal console to the source code folder and type the following command:
+\begin{lstlisting}[language=bash]
+$ docker-compose up
+\end{lstlisting}
+After that, you can access the application in your browser at \url{http://127.0.0.1}
+
+\section{Testing}
+I already implemented some tests in both unit and integration test to make sure the application work well and easy to address the problems during the development process.
+\subsection{Unit tests}
+The unit tests are located at \textit{/src/test/java/com/ebi/genome/service/} and independent from the others. You can run those tests using Maven by the following command at the project source root:
+\\
+\begin{lstlisting}[language=bash]
+  $ mvn clean test
+\end{lstlisting}
+
+\subsection{Integration tests}
+The integration tests are located at \textit{/src/integration-test/java/com/ebi/genome/} and required you have to specific the database server for this tests. You can do it by modify the \textit{/src/main/resources/profile/application-integration-test.properties} file as below:
+
+\begin{lstlisting}[language=java]
+  spring.datasource.url = jdbc:mysql://<ip>:<port>/<db test>
+  spring.datasource.username = <mysql username>
+  spring.datasource.password = <mysql password>
+
+  # Keep the connection alive if idle for a long time (needed in production)
+  spring.datasource.testWhileIdle = true
+  spring.datasource.validationQuery = SELECT 1
+\end{lstlisting}
+However, in the source code, I already updated those parameters by my running database (Google Cloud SQL) details. So, you can try to test with it.
+\\
+\\
+To run the integration tests, execute the following command at the source root:
+\\
+\begin{lstlisting}[language=bash]
+  $ mvn clean verify
+\end{lstlisting}
+
+\end{document}

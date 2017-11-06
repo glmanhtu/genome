@@ -1,0 +1,58 @@
+<md-content layout="column" flex="flex" ng-click="toggleSearch=false">
+    <table class="md-table" md-colresize="md-colresize">
+        <thead>
+            <tr class="md-table-headers-row">
+                <th class="md-table-header" ng-repeat="h in headers" ng-click="reverse=!reverse;order(h.field,reverse)">
+                    <a href="#" ng-if="handleSort(h.field)" >
+                        {{h.name}} <i class="ion-android-arrow-dropup" ng-show="reverse &amp;&amp; h.field == predicate.predicate"></i>
+                        <i class="ion-android-arrow-dropdown" ng-show="!reverse &amp;&amp; h.field == predicate.predicate"></i>
+                    </a>
+                    <span ng-if="!handleSort(h.field)">{{h.name}}</span>
+                </th>
+                <th class="md-table-header"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="md-table-content-row" ng-repeat="c in content">
+                <td>
+                    <div class="md-table-content md-table-first-column" ng-repeat="h in headers" ng-if="h.field == firstColumn">
+                        {{c.projectId}}
+                    </div>
+                </td>
+                <td class="md-table-content" ng-repeat="h in headers" ng-class="customClass[h.field]" ng-if="h.field != firstColumn"  ng-click="showAdvanced($event, c)">
+                    {{ c[h.field].length > litmitLongString ? ((c[h.field] | limitTo:litmitLongString) + "...") : c[h.field] }}
+                </td>
+                <td class="md-table-td-more">
+                    <md-menu>
+                        <md-button aria-label="Info" ng-click="$mdMenu.open($event)"><i class="ion-android-more-vertical"></i></md-button>
+                      <md-menu-content width="2">
+                        <md-menu-item>
+                          <md-button ng-click="updateProject($event, c)">
+                            <!-- <md-icon md-svg-icon="call:dialpad" md-menu-align-target></md-icon> -->
+                            Update project
+                          </md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                          <md-button ng-click="deleteProject($event, c)">
+                            <!-- <md-icon md-svg-icon="call:voicemail"></md-icon> -->
+                            Delete project
+                          </md-button>
+                        </md-menu-item>        
+                      </md-menu-content>
+                    </md-menu>                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="md-table-footer" layout="row">
+        <span flex="flex"></span>
+        <paging
+          page="tablePage"
+          page-size="count" 
+          total="totalItems"
+          paging-action="goToPage(page)"
+          show-prev-next="true"
+          show-first-last="true">
+        </paging>  
+    </div>
+</md-content>

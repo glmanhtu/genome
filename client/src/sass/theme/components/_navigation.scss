@@ -1,0 +1,38 @@
+.main-fab {
+  position:absolute;
+  z-index:20;
+  font-size:30px;
+  top:120px;
+  left:24px;
+  .add-button {
+    background: #3a7bd5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #3a6073, #3a7bd5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #3a6073, #3a7bd5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+}
+
+.md-breadcrumb {
+   padding-left:88px;
+ }
+
+.navigation {
+    background-image: url("../assets/img/nav.jpg");
+    background-size:     cover;
+    background-repeat:   no-repeat;
+    background-position: center center;
+    height: 156px;
+    h3 {
+      margin-left: 20px;
+    }
+    #search-box {
+      input {
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+      }
+      .form-control {
+        height: auto;
+        line-height: 1.44;
+      }
+    }
+}

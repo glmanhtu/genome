@@ -23,3 +23,9 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+docs/genome-report.aux
+docs/genome-report.log
+docs/genome-report.out
+docs/genome-report.pdf
+docs/genome-report.synctex.gz
+docs/genome-report.toc

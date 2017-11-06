@@ -1,0 +1,100 @@
+<md-dialog aria-label="{{projectData.projectId}}">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{title}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="hide()">
+          <md-icon md-svg-src="../assets/img/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content ng-if="!loaded" layout="row" layout-margin layout-padding layout-align="center center" aria-label="wait">
+    <md-progress-circular id="circular" class="md-primary md-hue-3" md-mode="indeterminate" md-diameter="50"><md-progress-circular>
+      Loading...
+    </md-dialog-content>
+
+    <md-dialog-content ng-if="loaded">
+      <div layout="column" ng-cloak class="md-inline-form">
+        <md-content layout-gt-sm="row" layout-padding>
+          <div>
+            <md-input-container>
+              <label>Project ID</label>
+              <input ng-model="project.projectId" ng-if="mode != 2">
+              <input ng-model="project.projectId" ng-if="mode == 2" readonly="true">
+            </md-input-container>
+
+            <md-input-container>
+              <label>Study Type</label>
+              <input ng-model="project.studyType">
+            </md-input-container>
+          </div>
+        </md-content>
+        <md-content layout-padding>
+        <div>
+          <form name="userForm">                        
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Project Title</label>
+              <input ng-model="project.title">
+            </md-input-container>
+
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Center Name</label>
+              <input ng-model="project.centerName">
+            </md-input-container>
+            
+
+            <md-input-container class="md-block">
+              <label>Project Description</label>
+              <textarea ng-model="project.description" cols="130" md-select-on-focus></textarea>
+            </md-input-container>
+
+            <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Eva Center</label>
+                <input ng-model="project.evaCenterName">
+              </md-input-container>
+
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Source Type</label>
+                <input ng-model="project.sourceType">
+              </md-input-container>
+              
+              <md-input-container class="md-block" flex-gt-sm>
+                <label>Taxonomy</label>
+                <md-select ng-model="project.taxonomyId">                  
+                  <md-option ng-repeat="taxonomy in taxonomies" ng-value="taxonomy.taxonomyId">
+                    {{taxonomy.taxonomyId}} - {{taxonomy.taxonomyCommonName}}
+                  </md-option>
+                </md-select>
+              </md-input-container>
+            </div>            
+
+          </form>
+        </div>
+      </md-content>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" ng-if="mode == 1 && loaded">      
+      <span flex></span>
+      <md-button ng-click="answer('not useful')">
+       Reset
+      </md-button>
+      <md-button ng-click="createNewProject()" class="md-raised md-primary">
+        Create Project
+      </md-button>
+    </md-dialog-actions>
+
+    <md-dialog-actions layout="row" ng-if="mode == 2 && loaded">      
+      <span flex></span>
+      <md-button ng-click="answer('not useful')">
+       Reset
+      </md-button>
+      <md-button ng-click="updateProject()" class="md-raised md-primary">
+        Update Project
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

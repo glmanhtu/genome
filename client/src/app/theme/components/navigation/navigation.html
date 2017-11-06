@@ -1,0 +1,35 @@
+<div class="main-fab">	
+
+	
+		<md-button class="md-fab add-button" ng-click="createProject($event)">+</md-button>      
+    
+</div>
+<md-toolbar class="navigation" layout="column">
+	<span flex="flex"></span>
+	<div class="md-toolbar-tools">
+		<div class="fill-height" layout="row" flex="flex">
+
+			<div class="md-toolbar-item md-breadcrumb">				
+				<a href="/"><h3>Genome repository</h3></a>
+			</div>
+
+			<span flex="flex"></span>
+			<form id="search-box" flex="flex" style="padding-left:88px" ng-submit="search()" ng-show="toggleSearch" layout="row">
+		       <div class="input-group">
+			      <div class="input-group-btn">
+			        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{getSearchTypeName(currentSearchType)}} <span class="caret"></span></button>
+			        <ul class="dropdown-menu">
+			          <li ng-repeat="stype in searchTypes" ng-click="setCurrentSearchType(stype.field)"><a>{{stype.name}}</a></li>
+			        </ul>
+			      </div><!-- /btn-group -->
+			      <input type="text" class="form-control" aria-label="..." placeholder="Enter search here..." ng-model="keyword">
+			    </div><!-- /input-group -->
+			</form>
+			<div class="md-toolbar-item md-tools" layout="row">
+				<a class="md-button md-default-theme" href="#" ng-click="toggleSearch = !toggleSearch">
+					<i class="ion-android-search"></i>
+				</a>
+			</div>
+		</div>
+	</div>
+</md-toolbar>
