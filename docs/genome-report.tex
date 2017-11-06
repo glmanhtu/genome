@@ -1,0 +1,90 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=1in,left=1.5in,includefoot]{geometry}
+% Graphic
+\usepackage{graphicx}
+\usepackage{float}
+
+% Hyperlinks
+\usepackage{hyperref}
+
+% Header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyhead[LE,RO]{\bfseries\thepage}
+\setlength{\headheight}{15pt}
+
+% Quotes character
+\usepackage[utf8]{inputenc}
+
+% color links
+\usepackage{color}  
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+    urlcolor=blue
+}
+
+\begin{document}
+\begin{titlepage}
+	\begin{center}
+\includegraphics[width=0.6\textwidth]{images/Ebi_official_logo}\\[1cm]
+
+{\Large The report}\\[0.5cm]	
+	
+	\line(1,0){400}\\[0.2in]
+	\huge{\bfseries Genome Application}\\
+	\line(1,0){400}\\[1.5cm]
+	\noindent	
+	
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+	
+		\begin{center} \large
+    	\emph{Authors:}\\
+    	Vu Manh \textsc{Tu}\\
+		\end{center}
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+	\end{center}
+\end{titlepage}
+
+% Table content
+\tableofcontents
+\thispagestyle{empty}
+\clearpage
+
+\section{The application}
+Working web-based application URL: \url{https://genome.glmanhtu.com}
+\subsection{Home page}
+
+
+\section{Framework and Programming Language}
+\subsection{The Front-End}
+AngularJS is our main framework (\url{www.angularjs.org}) because:
+\begin{itemize}
+	\item Angularjs require you to split your app into MVC components and then it manages your components for you and also serves as the pipeline that connects them.
+	\item Directives achieve this by enabling us to invent our own HTML elements. By putting all our DOM manipulation code into directives, we can separate them out of our MVC app. This allows our MVC app to only concern itself with updating the view with new data.
+	\item Filters filter the data before they reach the view and can involve something as simple as formatting decimal places on a number, reversing the order of an array, filtering an array based on a parameter, or implementing pagination. Filters are designed to be standalone functions that are separate from your app, similar to Directives, but are only concerned with data transformations.
+	\item All the points up till now mean that you get to write less code. You don’t have to write your own MVC pipeline. The view is defined using HTML, which is more concise. Data models are simpler to write without getters/setters. Data-binding means you don’t have to put data into the view manually. Since directives are separate from app code, they can be written by another team in parallel with minimal integration issues. Filters allow you to manipulate data on the view level without changing your controllers.
+	\item Services are exactly what they sound like. They don’t get involved with the MVC of your app, but simply provide an outward API to expose whatever you want it to expose. Most of the time it syncs up to a server to maintain an offline data store and exposes methods to push and pull data to and from a server. Or it can be used to create a resource sharing service that allows multiple controllers to share the same resources.
+	\item Data models in Angular are plain old JavaScript objects (POJO) and don’t require extraneous getter and setter functions. You can add and change properties directly on it and loop over objects and arrays at will. Your code will look much cleaner and more intuitive, the way mother nature intended.
+\end{itemize}
+I also applied some new technical to make the development and
+control project easier such as NPM to create a local server, Bower as package control, Gulp as automatic builder tool and SASS to control UI.
+\subsection{The Back-End}
+We use Java Spring framework and java programming language because:
+\begin{itemize}
+	\item It's free.
+	\item Java Spring is MVC framework base on JavaEE and compatible a huge library of Java can use in this project without problem. In orther hand, Java Spring has supported from very lage Java Comunication. Which Java Spring framework (Spring Boot) was make easier and automatically to config system that help team save a lot of time and avoid errors.
+\end{itemize}
+
+\end{document}
