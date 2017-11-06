@@ -15,6 +15,11 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
+
+/**
+ * Handler Rest API model binding exception
+ * Transform exception to understandable json message to help client visualize
+ */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 public class MethodArgumentNotValidExceptionController {

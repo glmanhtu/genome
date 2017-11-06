@@ -14,6 +14,12 @@ public class TaxonomyService {
     @Autowired
     private TaxonomyRepository taxonomyRepository;
 
+    /**
+     * Get Taxonomy by taxonomyId
+     * @throws TaxonomyNotExist when unable to find taxonomy by given id
+     * @param taxonomiesId
+     * @return Taxonomy
+     */
     public Taxonomy getTaxonomy(int taxonomiesId) {
         Taxonomy taxonomy = taxonomyRepository.findOne(taxonomiesId);
         if (taxonomy == null) {
@@ -22,6 +28,10 @@ public class TaxonomyService {
         return taxonomy;
     }
 
+    /**
+     * Get all taxonomies
+     * @return
+     */
     public List<Taxonomy> getTaxonomies() {
         return taxonomyRepository.findAll();
     }
