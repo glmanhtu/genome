@@ -15,7 +15,6 @@ public class TestConstants {
     public static final String ERROR_CODE_VALIDATION_FAILED = "BAD_REQUEST";
 
     public static final String FIELD_NAME_DESCRIPTION = "description";
-    public static final String FIELD_NAME_TITLE = "title";
 
     public static final int MAX_LENGTH_DESCRIPTION = 500;
     public static final int MAX_LENGTH_TITLE = 100;

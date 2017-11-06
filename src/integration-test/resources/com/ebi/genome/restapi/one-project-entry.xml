@@ -1,0 +1,15 @@
+<dataset>
+    <taxonomies taxonomy_id="9606"
+                taxonomy_common_name="Common bean"
+                taxonomy_scientific_name="Phaseolus vulgaris"
+    />
+    <projects project_id="PRJEB10956"
+              center_name="University of Michigan Medical School"
+              description="Targetted confirmatory sequencing of heterogenous variants detected by exome sequencing of spatially disparate areas from six rectal tumors"
+              eva_center_name="Center for Genomic Regulation - CRG (Barcelona); Institute of Human Genetics - Helmholtz Zentrum (Munich)"
+              source_type="Germline"
+              study_type="Case Set"
+              title="Intra-tumor Genetic Heterogeneity in Rectal Cancer"
+              taxonomy_id="9606"
+    />
+</dataset>
