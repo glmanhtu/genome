@@ -18,6 +18,15 @@
 % Quotes character
 \usepackage[utf8]{inputenc}
 
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+%  frame=single,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
 % color links
 \usepackage{color}  
 \usepackage{hyperref}
@@ -63,11 +72,17 @@
 \clearpage
 
 \section{The application}
-Working web-based application URL: \url{https://genome.glmanhtu.com}
-\subsection{Home page}
+Working web-based application URL: \url{https://genome.glmanhtu.com}\\\\
+Genome is a web-based application that archives genomics data and provides a friendly way to interact with those data.\\\\
+The application divide into two parts: one is Back-End application, which responsible for things like calculations, business logic, database interactions, performance and another is Front-End application, which is what the user sees, touches and experiences.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{images/genome-overview}
+\caption{Genome application overview}
+\end{figure}
 
-\section{Framework and Programming Language}
+\section{Framework and programming language}
 \subsection{The Front-End}
 AngularJS is our main framework (\url{www.angularjs.org}) because:
 \begin{itemize}
@@ -81,10 +96,48 @@ AngularJS is our main framework (\url{www.angularjs.org}) because:
 I also applied some new technical to make the development and
 control project easier such as NPM to create a local server, Bower as package control, Gulp as automatic builder tool and SASS to control UI.
 \subsection{The Back-End}
-We use Java Spring framework and java programming language because:
+I use Java Spring framework and java programming language because:
 \begin{itemize}
 	\item It's free.
 	\item Java Spring is MVC framework base on JavaEE and compatible a huge library of Java can use in this project without problem. In orther hand, Java Spring has supported from very lage Java Comunication. Which Java Spring framework (Spring Boot) was make easier and automatically to config system that help team save a lot of time and avoid errors.
 \end{itemize}
 
+\section{Deployment}
+I've been implemented both Chef and Docker because of easier for the specific type of users.  With the end-user, they can run direct this application by docker-compose while the developer can deploy their changes and see the result immediately via Chef.
+\subsection{Chef}
+With Chef Deployment, you can deploy your application, install all dependencies and  configure your clean new virtual private machine (VPS) with a single command. However, it require you to install \& configure Chef workstation. 
+\\
+\begin{lstlisting}[language=bash]
+  $ knife bootstrap <Ip of server> -N '<node name>' -r 'role[<environment>]' --ssh-user <user name on node> --sudo --ssh-identity-file <ssh private credential> --secret-file <location of secret file>
+\end{lstlisting}
+
+With `prod` environment, this command will check, install \& configure (if not exist):
+\begin{itemize}
+	\item \textbf{Oracle Java JDK}
+	\item \textbf{Git}: clone or pull changes from git repository
+	\item \textbf{Maven}: build project
+	\item \textbf{Nginx}: forward port for backend or web-server for frontend
+	\item \textbf{NodeJS}: build frontend
+\end{itemize}
+
+If your git repository is private, Chef also supports to inject private deploy key and encrypt it via the secret file.
+\\\\
+Once your VPS bootstrapped, you can easy to re-deploy to get your changes from git repository take effect by one of the following ways:
+\\
+\\
+\indent\textbf{Method 1}: Stay at your workstation and run the following command to re-deploy all your VPS:
+\begin{lstlisting}[language=bash]
+  $ knife ssh `name:*' `sudo chef-client'
+\end{lstlisting}
+
+\textbf{Method 2}: Connect to your VPS and type the following command:
+\begin{lstlisting}[language=bash]
+  $ sudo chef-client
+\end{lstlisting}
+\subsection{Docker}
+With Docker, you just need to move the terminal console to the source code folder and type the following command:
+\begin{lstlisting}[language=bash]
+$ docker-compose up
+\end{lstlisting}
+After that, you can access the application in your browser at \url{http://127.0.0.1}
 \end{document}
