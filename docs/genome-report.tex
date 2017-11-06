@@ -74,7 +74,7 @@
 \section{The application}
 Working web-based application URL: \url{https://genome.glmanhtu.com}\\\\
 Genome is a web-based application that archives genomics data and provides a friendly way to interact with those data.\\\\
-The application divide into two parts: one is Back-End application, which responsible for things like calculations, business logic, database interactions, performance and another is Front-End application, which is what the user sees, touches and experiences.
+The application divide into two parts: one is backend application, which responsible for things like calculations, business logic, database interactions, performance and another is frontend application, which is what the user sees, touches and experiences.
 
 \begin{figure}[H]
 \centering
@@ -165,7 +165,7 @@ To delete a project study, click on three-dot-button at the right of the one you
 \end{figure}
 
 \section{Framework and programming language}
-\subsection{The Front-End}
+\subsection{The frontend}
 AngularJS is my main framework (\url{www.angularjs.org}) because:
 \begin{itemize}
 	\item Angularjs require you to split your app into MVC components and then it manages your components for you and also serves as the pipeline that connects them.
@@ -175,13 +175,13 @@ AngularJS is my main framework (\url{www.angularjs.org}) because:
 	\item Services are exactly what they sound like. They don’t get involved with the MVC of your app, but simply provide an outward API to expose whatever you want it to expose. Most of the time it syncs up to a server to maintain an offline data store and exposes methods to push and pull data to and from a server. Or it can be used to create a resource sharing service that allows multiple controllers to share the same resources.
 	\item Data models in Angular are plain old JavaScript objects (POJO) and don’t require extraneous getter and setter functions. You can add and change properties directly on it and loop over objects and arrays at will. Your code will look much cleaner and more intuitive, the way mother nature intended.
 \end{itemize}
-I also applied some new technical to make the development and
+I also applied some technicals to make the development and
 control project easier such as NPM to create a local server, Bower as package control, Gulp as automatic builder tool and SASS to control UI style.
 
 \subsection{API Docs}
 You can view and also test my APIs at \url{https://genome.docs.apiary.io}
 
-\subsection{The Back-End}
+\subsection{The backend}
 I use Java Spring framework and java programming language because:
 \begin{itemize}
 	\item It's free.
@@ -257,5 +257,4 @@ To run the integration tests, execute the following command at the source root:
   $ mvn clean verify
 \end{lstlisting}
 
-\section{Limitation}
 \end{document}
