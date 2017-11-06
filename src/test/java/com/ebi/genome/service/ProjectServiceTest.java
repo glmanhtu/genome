@@ -1,6 +1,5 @@
 package com.ebi.genome.service;
 
-import com.ebi.genome.TestConstants;
 import com.ebi.genome.exceptions.project.ProjectAlreadyExists;
 import com.ebi.genome.exceptions.project.ProjectNotFound;
 import com.ebi.genome.persistence.domain.Project;
@@ -12,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 import org.springframework.data.domain.Page;
@@ -25,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyListOf;
 import static org.mockito.Matchers.anyString;
@@ -55,7 +52,7 @@ public class ProjectServiceTest {
     @Before
     public void setUp() throws Exception {
 
-        Sort sort = new Sort(Sort.Direction.ASC, TestConstants.FIELD_NAME_TITLE);
+        Sort sort = new Sort(Sort.Direction.ASC, "title");
         pageRequest = new PageRequest(PAGE_NUMBER, PAGE_SIZE, sort);
 
         taxonomy = new Taxonomy();

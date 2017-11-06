@@ -36,7 +36,10 @@
         <!--Inject value to object-->
         <modelmapper.vertion>0.7.4</modelmapper.vertion>
 
+        <!--Test-->
         <mockito.version>1.9.5</mockito.version>
+        <dbunit.version>2.5.1</dbunit.version>
+        <spring.dbunit.version>1.2.1</spring.dbunit.version>
     </properties>
 
     <profiles>
@@ -118,6 +121,24 @@
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
             <version>${modelmapper.vertion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>${dbunit.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>junit</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.github.springtestdbunit</groupId>
+            <artifactId>spring-test-dbunit</artifactId>
+            <version>${spring.dbunit.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
