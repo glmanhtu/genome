@@ -15,6 +15,14 @@
 			{
 				name: "Taxonomy Id",
 				field: "taxonomyId"
+			},
+			{
+			    name: "Project ID",
+			    field: "projectId"
+			},
+			{
+			    name: "Title",
+			    field: "title"
 			}
 		];
 		$rootScope.keyword = "";
