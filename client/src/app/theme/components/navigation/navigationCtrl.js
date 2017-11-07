@@ -17,7 +17,7 @@
 				field: "taxonomyId"
 			},
 			{
-			    name: "Project ID",
+			    name: "Project Id",
 			    field: "projectId"
 			},
 			{
