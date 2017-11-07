@@ -12,4 +12,6 @@ public interface ProjectRepository extends CrudRepository<Project, String> {
     Page<Project> findAll(Pageable pageable);
     Page<Project> findByTaxonomyIn(List<Taxonomy> taxonomies, Pageable pageable);
     Page<Project> findByStudyTypeContaining(String studyType, Pageable pageable);
+    Page<Project> findByTitleContaining(String title, Pageable pageable);
+    Page<Project> findByProjectIdContaining(String projectId, Pageable pageable);
 }

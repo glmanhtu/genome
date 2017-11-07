@@ -1,9 +1,0 @@
-<div class="big-search" click-outside="closeSuggest()">
-    <form id="big-searchform" ng-submit="searchCall()" ng-class="{'has-results': hasResults}">        
-        <input type="text" class="big-search-input" ng-model="searchString" placeholder="Exchange search" value="" autocomplete="off" ng-change="getSearchSuggests()" ng-click="showSearchTips = true"><br>
-
-        <div class="search-controls">    
-            <input type="submit" class="submit button" name="submit" id="big-search-submit" value="Search" />
-        </div><!-- .search-controls -->
-    </form><!-- #big-searchform -->
-</div>
