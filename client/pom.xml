@@ -48,7 +48,7 @@
                             <goal>gulp</goal>
                         </goals>
                         <configuration>
-                            <arguments>build --env=dev</arguments>
+                            <arguments>build --env=docker</arguments>
                         </configuration>
                     </execution>
                 </executions>
