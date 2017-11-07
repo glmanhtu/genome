@@ -40,7 +40,27 @@ public class ProjectService {
     }
 
     /**
-     * Get projects by study type
+     * Get projects by title containing
+     * @param title
+     * @param pageable
+     * @return Page<Project>
+     */
+    public Page<Project> getProjectsByTitle(String title, Pageable pageable) {
+        return projectRepository.findByTitleContaining(title, pageable);
+    }
+
+    /**
+     * Get projects by projectId containing
+     * @param projectId
+     * @param pageable
+     * @return Page<Project>
+     */
+    public Page<Project> getProjectsByProjectId(String projectId, Pageable pageable) {
+        return projectRepository.findByProjectIdContaining(projectId, pageable);
+    }
+
+    /**
+     * Get projects by study type containing
      * Support Paging, Order
      * @param studyType
      * @param pageable

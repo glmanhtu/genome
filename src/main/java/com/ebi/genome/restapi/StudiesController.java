@@ -80,6 +80,30 @@ public class StudiesController {
         return DefaultResponse.success(projectsDTOs);
     }
 
+    @GetMapping(params = {"projectId"})
+    public ResponseEntity<?> findAllStudiesByProjectId(
+            @RequestParam("projectId") String projectId, Pageable pageRequest) {
+        Page<Project> projects = projectService.getProjectsByProjectId(projectId, pageRequest);
+        Page<ProjectDTO> projectsDTOs = projects.map(project1 -> {
+            ProjectDTO projectDTO = convertToDTO(project1);
+            projectDTO.setDescription("");
+            return projectDTO;
+        });
+        return DefaultResponse.success(projectsDTOs);
+    }
+
+    @GetMapping(params = {"title"})
+    public ResponseEntity<?> findAllStudiesByTitle(
+            @RequestParam("title") String title, Pageable pageRequest) {
+        Page<Project> projects = projectService.getProjectsByTitle(title, pageRequest);
+        Page<ProjectDTO> projectsDTOs = projects.map(project1 -> {
+            ProjectDTO projectDTO = convertToDTO(project1);
+            projectDTO.setDescription("");
+            return projectDTO;
+        });
+        return DefaultResponse.success(projectsDTOs);
+    }
+
     @GetMapping(value = "/{projectId}")
     public ResponseEntity<?> getStudy(@PathVariable("projectId") String projectId) {
         Project project = projectService.getProject(projectId);
